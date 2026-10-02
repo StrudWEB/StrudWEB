@@ -1,0 +1,2220 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Strud WEB — Korku Topluluğu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<style>
+  :root{
+    --bg:#1a1917;
+    --bg-panel:#262422;
+    --bg-elev:#33302d;
+    --text:#f4f2ee;
+    --text-dim:#a8a29e;
+    --blood:#b81440;
+    --blood-dim:#850d2e;
+    --sick:#6e803c;
+    --sick-bright:#a1b853;
+    --border:#403d39;
+    --shadow-glow: rgba(184, 20, 64, 0.2);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    min-height:100vh;
+    position:relative;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:9999;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.4) 100%);
+  }
+  body::after{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:9998;
+    opacity:0.03;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a{color:inherit; text-decoration:none;}
+  .hidden{display:none !important;}
+
+  /* NAVBAR */
+  #navbar{
+    position:sticky; top:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; padding:14px 24px;
+    background:rgba(26,25,23,0.96); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border); flex-wrap:wrap;
+  }
+  .brand{
+    font-family:'Inter',sans-serif; font-weight:800; font-size:20px;
+    letter-spacing:2px; text-transform:uppercase; color:var(--blood);
+    text-shadow: 0 0 8px var(--shadow-glow); white-space:nowrap;
+    display:flex; align-items:center; gap:10px;
+  }
+  .brand-logo{ height:32px; width:32px; border-radius:6px; display:block; }
+  .auth-logo{ display:block; height:64px; width:64px; margin:0 auto 12px; border-radius:10px; }
+  #navlinks{ display:flex; gap:4px; flex-wrap:wrap; }
+  .navlink{
+    padding:8px 14px; font-size:13px; font-weight:600; letter-spacing:0.5px;
+    text-transform:uppercase; color:var(--text-dim); background:transparent;
+    border:1px solid transparent; border-radius:3px; cursor:pointer; transition: all 0.2s ease;
+  }
+  .navlink:hover{ color:var(--text); border-color:var(--border); }
+  .navlink.active{ color:var(--text); background:var(--bg-elev); border-color:var(--blood-dim); }
+  #authbar{ display:flex; align-items:center; gap:10px; }
+  .pill{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; padding:4px 10px;
+    border-radius:2px; border:1px solid var(--border); color:var(--text-dim); background: var(--bg-elev);
+  }
+  .pill.founder{ color:#fff; background:var(--blood); border-color:var(--blood); font-weight:700;}
+  .pill.admin{ color:#000; background:var(--sick-bright); border-color:var(--sick-bright); font-weight:700;}
+  .pill.clickable{ cursor:pointer; }
+  .pill.clickable:hover{ border-color:var(--text-dim); color:var(--text); }
+  .lang-btn-row{ display:flex; gap:10px; justify-content:center; margin-top:10px; }
+  .lang-btn-row .btn{ flex:1; }
+  
+  .btn{
+    font-family:'Inter',sans-serif; font-size:12.5px; font-weight:600; padding:9px 18px;
+    background:var(--blood-dim); color:var(--text); border:1px solid var(--blood);
+    border-radius:3px; cursor:pointer; letter-spacing: 0.3px; transition: all 0.2s ease;
+  }
+  .btn:hover{ background:var(--blood); box-shadow: 0 0 10px var(--shadow-glow); }
+  .btn.ghost{ background:transparent; border-color:var(--border); color:var(--text-dim); }
+  .btn.ghost:hover{ color:var(--text); border-color:var(--text-dim); }
+  .btn.small{ padding:5px 10px; font-size:11.5px; }
+  .btn.remove{ background:transparent; border:1px solid var(--blood); color:var(--blood); margin-top:8px; width:100%; }
+  .btn.remove:hover{ background: rgba(184,20,64,0.1); }
+  .btn:disabled{ opacity:0.3; cursor:not-allowed; }
+
+  main{ max-width:820px; margin:0 auto; padding:32px 20px 80px; }
+  .hero-section { text-align: center; margin: 20px 0 40px; background: var(--bg-panel); border: 1px solid var(--border); padding: 40px 20px; border-radius: 4px; }
+  .hero-section h1 { font-size: 32px; color: var(--blood); margin: 0 0 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 800; }
+  .hero-section p { font-size: 14px; color: var(--text-dim); max-width: 620px; margin: 0 auto; line-height: 1.6; }
+  
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .feature-box { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 4px; padding: 20px; transition: all 0.2s ease; }
+  .feature-box:hover { border-color: var(--blood-dim); transform: translateY(-2px); }
+  .feature-box h3 { color: var(--text); margin: 0 0 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;}
+  .feature-box p { margin: 0; color: var(--text-dim); font-size: 12.5px; line-height: 1.5; }
+
+  /* AUTH */
+  .auth-wrap{ max-width:400px; margin:60px auto; padding:32px; background:var(--bg-panel); border:1px solid var(--border); border-radius:4px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+  .auth-wrap h1{ font-family:'Inter',sans-serif; font-weight:800; color:var(--blood); font-size:32px; margin:0 0 4px; text-align:center; letter-spacing:2px; text-transform:uppercase; }
+  .auth-sub{ text-align:center; color:var(--text-dim); font-size:13px; margin-bottom:24px; }
+  .field{ margin-bottom:16px; position: relative; }
+  .field label{ display:block; font-size:11px; color:var(--text-dim); margin-bottom:6px; font-family:'IBM Plex Mono',monospace; letter-spacing: 0.5px; }
+  .field input, .field textarea, .field select{ width:100%; padding:10px 12px; background:var(--bg-elev); border:1px solid var(--border); color:var(--text); border-radius:3px; font-family:'Inter',sans-serif; font-size:13.5px; transition: border-color 0.2s ease; }
+  .field textarea{ resize:vertical; min-height:90px; }
+  .field input:focus, .field textarea:focus{ outline:none; border-color:var(--blood); }
+  .field .counter { position: absolute; bottom: -16px; right: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--text-dim); }
+  .auth-toggle{ text-align:center; margin-top:16px; font-size:13px; color:var(--text-dim); }
+  .auth-toggle span{ color:var(--blood); cursor:pointer; text-decoration:underline; }
+  .error-msg{ color:#e26f6f; font-size:12px; margin-top:8px; font-family:'IBM Plex Mono',monospace; }
+  .info-msg{ color:var(--sick-bright); font-size:12px; margin-top:8px; font-family:'IBM Plex Mono',monospace; }
+
+  /* FEED / TOOLBAR */
+  .feed-header{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:10px;}
+  .feed-header h2{ font-family:'Inter',sans-serif; font-weight:800; color:var(--blood); font-size:24px; margin:0; letter-spacing:0.5px;}
+  
+  .search-filter-bar{ display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+  .search-group { display: flex; gap: 10px; flex: 1; min-width: 200px; flex-wrap: wrap; }
+  .search-input{ flex: 1; min-width: 150px; padding: 8px 12px; background: var(--bg-panel); border: 1px solid var(--border); color: var(--text); font-size: 13px; border-radius: 3px; }
+  .search-input:focus{ outline: none; border-color: var(--blood-dim); }
+  
+  .filter-tags, .sort-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filter-btn, .sort-btn{ background: var(--bg-panel); border: 1px solid var(--border); color: var(--text-dim); padding: 6px 12px; font-size: 12px; border-radius: 3px; cursor: pointer; font-family: 'IBM Plex Mono', monospace; }
+  .filter-btn.active, .sort-btn.active{ background: var(--bg-elev); color: var(--text); border-color: var(--sick-bright); }
+
+  .stats-banner{ background: var(--bg-panel); border-left: 3px solid var(--blood-dim); padding: 10px 16px; margin-bottom: 24px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--text-dim); display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .new-post-box{ background:var(--bg-panel); border:1px solid var(--border); border-radius:4px; padding:20px; margin-bottom:24px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+  .new-post-box h3{ margin:0 0 14px; font-size:13px; color:var(--text-dim); font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:1px;}
+  .form-row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  @media(max-width: 650px){ .form-row-grid { grid-template-columns: 1fr; } }
+
+  /* POST CARD & MEDIA */
+  .post-card{ background:var(--bg-panel); border:1px solid var(--border); border-radius:4px; padding:20px; margin-bottom:20px; transition: transform 0.2s ease, border-color 0.2s ease; }
+  .post-card:hover{ border-color: var(--text-dim); }
+  .post-meta{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text-dim); margin-bottom:10px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+  .post-meta .author{ color:var(--sick-bright); font-weight: 500; }
+  .post-title{ font-size:18px; font-weight:700; margin:0 0 10px; letter-spacing: 0.2px; color: #fff; }
+  .post-content{ font-size:14px; line-height:1.6; color:var(--text); white-space:pre-wrap; margin-bottom:14px; }
+  
+  .special-badge-area { margin-bottom: 14px; }
+  .special-link-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--bg-elev); border: 1px solid var(--border); color: var(--sick-bright); font-family: 'IBM Plex Mono', monospace; font-size: 12px; padding: 6px 12px; border-radius: 3px; transition: all 0.2s ease; }
+  .special-link-btn:hover { border-color: var(--sick-bright); background: rgba(161,184,83,0.05); }
+
+  .post-media-wrap { margin-bottom: 14px; border-radius: 3px; overflow: hidden; background: #000; border: 1px solid var(--border); }
+  .post-img, .post-video-element { width: 100%; max-height: 450px; object-fit: contain; display: block; }
+  .post-video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+  .post-video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+  .post-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 14px; }
+  .post-gallery .post-media-wrap { margin-bottom: 0; }
+  .post-gallery .post-img { max-height: 220px; }
+
+  .post-rating { display:inline-flex; align-items:center; gap:4px; font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:#e0b84a; margin-bottom:10px; }
+  .hashtag-row { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+  .hashtag-pill { background:var(--bg-elev); border:1px solid var(--border); color:var(--sick-bright); font-family:'IBM Plex Mono',monospace; font-size:11.5px; padding:3px 9px; border-radius:999px; cursor:pointer; }
+  .hashtag-pill:hover { border-color:var(--sick-bright); }
+
+  .spoiler-wrap { position:relative; margin-bottom:14px; }
+  .spoiler-blur { filter: blur(14px); user-select:none; pointer-events:none; }
+  .spoiler-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(10,9,8,0.55); border-radius:4px; }
+  .spoiler-reveal-btn { background:var(--blood-dim); border:1px solid var(--blood); color:var(--text); font-family:'IBM Plex Mono',monospace; font-size:12.5px; padding:8px 16px; border-radius:4px; cursor:pointer; }
+  .spoiler-reveal-btn:hover { background:var(--blood); }
+
+  .post-actions{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top: 16px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 14px;}
+  .react-btn{ display:flex; align-items:center; gap:6px; background:var(--bg-elev); border:1px solid var(--border); color:var(--text-dim); padding:6px 12px; border-radius:3px; font-size:12px; cursor:pointer; font-family:'IBM Plex Mono',monospace; transition: all 0.15s ease; }
+  .react-btn:hover{ border-color:var(--text-dim); color:var(--text); }
+  .react-btn.active-like{ color:var(--sick-bright); border-color:var(--sick-bright); background: rgba(161,184,83,0.1); }
+  .react-btn.active-dislike{ color:var(--blood); border-color:var(--blood); background: rgba(184,20,64,0.1); }
+  .react-btn.active-fav{ color:#cca333; border-color:#cca333; }
+  .empty-state{ text-align:center; padding:60px 20px; color:var(--text-dim); font-family: 'IBM Plex Mono', monospace; }
+
+  /* ADMIN */
+  .admin-section{ background:var(--bg-panel); border:1px solid var(--border); border-radius:4px; padding:20px; margin-bottom:20px;}
+  .admin-section h3{ font-family:'IBM Plex Mono',monospace; font-size:13px; text-transform:uppercase; letter-spacing:0.5px; color:var(--sick-bright); margin:0 0 14px;}
+  .app-row{ display:flex; justify-content:space-between; align-items:flex-start; gap:12px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .app-row:last-child{ border-bottom:none; }
+  .app-row .txt{ flex:1; }
+  .app-row .who{ font-weight:700; font-size:13px; }
+  .app-row .msg{ color:var(--text-dim); font-size:13px; margin-top:4px; }
+  .status-tag{ font-family:'IBM Plex Mono',monospace; font-size:11px; padding:2px 8px; border-radius:2px; }
+  .status-tag.beklemede{ background:#4a3f25; color:#cca333; }
+  .status-tag.kabul{ background:#254a27; color:var(--sick-bright); }
+  .status-tag.red{ background:#4a2529; color:#e26f6f; }
+  .msg-row{ padding:12px 0; border-bottom:1px solid var(--border); }
+  .msg-row:last-child{ border-bottom:none; }
+  .msg-row .from{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text-dim); }
+  .msg-row .body{ font-size:13px; margin-top:4px; }
+
+  /* ARKADAŞLAR & SOHBET */
+  .chat-window{ display:flex; flex-direction:column; height:60vh; }
+  .chat-messages{ flex:1; overflow-y:auto; margin-bottom:14px; display:flex; flex-direction:column; gap:10px; padding:4px; }
+  .chat-bubble{ max-width:75%; border:1px solid var(--border); border-radius:8px; padding:9px 13px; }
+  .chat-bubble.mine{ align-self:flex-end; background:var(--blood-dim); border-color:var(--blood); }
+  .chat-bubble.theirs{ align-self:flex-start; background:var(--bg-elev); }
+  .chat-bubble .txt{ font-size:13.5px; white-space:pre-wrap; line-height:1.4; }
+  .chat-bubble .time{ font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--text-dim); margin-top:5px; }
+  .edit-msg-btn{ cursor:pointer; text-decoration:underline; margin-left:6px; }
+  .edit-msg-btn:hover{ color:var(--text); }
+  .chat-form{ display:flex; gap:8px; }
+  .chat-form input{ flex:1; }
+
+  footer{ text-align:center; padding:40px 0; color:var(--text-dim); font-size:11px; font-family:'IBM Plex Mono',monospace; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="brand"><img src="data:image/png;base64,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" alt="Strud WEB logo" class="brand-logo">STRUD WEB</div>
+  <div id="navlinks"></div>
+  <div id="authbar"></div>
+</nav>
+
+<main id="main-content"></main>
+
+<footer id="siteFooter">&copy; 2026 STRUD WEB — Tüm Hakları Saklıdır. | MKB</footer>
+
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+const SUPABASE_URL = "https://zxnsxueirtsxwxowlkfu.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4bnN4dWVpcnRzeHd4b3dsa2Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ0MjI3NTUsImV4cCI6MjA5OTk5ODc1NX0.jpf11yI3rLR8oyIXAz5Fn3z-Z0sjnuLOwgb4d3U6gRk";
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const LOGO_URI = "data:image/png;base64,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";
+
+/* ================= DİL / İ18N ================= */
+let currentLang = localStorage.getItem('strud_lang') || null;
+
+const I18N = {
+  tr: {
+    lang_gate_sub: "Devam etmek için bir dil seçin",
+    lang_tr: "Türkçe",
+    lang_en: "English",
+
+    auth_sub: "Giriş Yapın",
+    label_nickname: "RUMUZ (NICKNAME)",
+    label_email: "GMAIL ADRESİ",
+    email_note: "* Sistemimizde 1 Gmail adresi başına 1 hesap oluşturulabilir.",
+    label_password: "ŞİFRE",
+    btn_create_account: "Hesap Oluştur",
+    btn_login: "Giriş Yap",
+    btn_resend_confirmation: "Onay E-postasını Tekrar Gönder",
+    toggle_have_account: "Zaten bir hesabın var mı?",
+    toggle_login_link: "Giriş yap",
+    toggle_no_account: "Hesabın yok mu?",
+    toggle_signup_link: "Kayıt ol",
+    err_gmail_only: "Sadece @gmail.com uzantılı e-posta adresleri kabul edilir.",
+    err_gmail_plus_limit: "Bu e-posta ile en fazla 2 hesap açılabilir: isim@gmail.com veya isim+2@gmail.com",
+    err_nickname_short: "Rumuz en az 3 karakter olmalı.",
+    signup_pending_msg: "Kayıt oluşturuldu. E-postanıza gelen onay bağlantısına tıkladıktan sonra giriş yapabilirsiniz.",
+    err_email_unconfirmed: "Bu e-posta henüz onaylanmamış.",
+    switch_to_other_lang: "English",
+
+    nav_ana_sayfa: "Ana Sayfa",
+    nav_destek: "Destek",
+    nav_admin: "Adminlik",
+    nav_arkadaslar: "Arkadaşlar",
+    btn_logout: "Çıkış",
+    role_founder: "KURUCU",
+    role_admin: "ADMIN",
+
+    cat_oyun: "Korku Oyunları",
+    cat_film: "Korku Filmleri",
+    cat_video: "Korku Videoları",
+    cat_sohbet: "Sohbetler",
+    cat_topluluk: "Topluluk",
+
+    home_hero_title: "STRUD TOPLULUK PLATFORMU",
+    home_hero_desc: "Korku ve oyun kültürünü merkezine alan bağımsız paylaşım ve tartışma ağına hoş geldiniz. Alt tarafta yer alan operasyonel panelleri kullanarak topluluk altyapısı hakkında teknik bilgi edinebilirsiniz.",
+    home_feat1_title: "Özelleştirilmiş Kategoriler",
+    home_feat1_desc: "Oyunlar, filmler ve yepyeni \"Topluluk\" kategorisi ile paylaşımlarınızı en doğru alanda sergileyin.",
+    home_feat2_title: "Fotoğraf & Video Bağlantısı",
+    home_feat2_desc: "Paylaşımlarınıza fotoğraf ve video URL'leri (YouTube dahil) ekleyerek içeriğinizi zenginleştirin.",
+    home_feat3_title: "Gelişmiş Sıralama",
+    home_feat3_desc: "Popüler (En çok beğenilenler), Trend (En çok etkileşim alanlar) ve Yeni filtreleriyle içerik denizinde kaybolmadan gezin.",
+    home_feat4_title: "Yetkilendirme Ağı",
+    home_feat4_desc: "Güvenli veritabanı kuralları (RLS) ile korunan, başvuru tabanlı çalışan moderasyon ve raporlama hiyerarşisi mevcuttur.",
+    home_explore_btn: "Topluluğu Keşfet",
+
+    stats_loading: "Metrikler toplanıyor...",
+    stats_category_posts: "Kategori Gönderisi",
+    stats_image_count: "Görsel Ekli",
+    stats_video_count: "Video Ekli",
+    new_post_heading: "Yeni Gönderi Oluştur",
+    label_post_title: "GÖNDERİ BAŞLIĞI",
+    post_title_placeholder: "Başlık verisi...",
+    label_post_content: "İÇERİK DETAYI",
+    post_content_placeholder: "Açıklama metni girin...",
+    label_game_store_link: "OYUN MAĞAZA SAYFASI URL (STEAM / EPIC VB.)",
+    game_link_placeholder: "oyun link URL'si",
+    label_movie_review_link: "FİLM İNCELEME / IMDB LINKI",
+    movie_link_placeholder: "https://www.imdb.com/title/...",
+    label_image_url: "FOTOĞRAF URL (Opsiyonel)",
+    image_url_placeholder: "Fotoğraf link URL'si",
+    label_video_url: "VİDEO URL (Opsiyonel)",
+    video_url_placeholder: "Video link URL'si (YouTube dahil)",
+    btn_publish_post: "Gönderiyi Yayınla",
+    search_placeholder: "Anahtar kelime veya yazar ara...",
+    filter_all: "Tümü",
+    filter_images: "Görseller",
+    filter_videos: "Videolar",
+    sort_new: "Yeni",
+    sort_popular: "Popüler",
+    sort_trend: "Trend",
+    db_scanning: "Veri tabanı taranıyor...",
+    empty_no_data: "Kriterlere uygun veri kaydı bulunamadı.",
+    store_link_btn: "🛒 Mağaza Sayfasına Git",
+    review_link_btn: "🎬 İnceleme / IMDb Kaynağı",
+    favorite_btn: "Favori",
+    report_btn: "🚩 Bildir",
+    delete_btn: "Sil",
+    edit_btn: "Düzenle",
+    save_btn: "Kaydet",
+    cancel_btn: "Vazgeç",
+    confirm_delete_post: "Veri kaydını silmek istediğinize emin misiniz?",
+    report_prompt: "Raporlama gerekçesi?",
+    report_success: "Rapor kaydı sisteme işlendi.",
+    err_action_failed: "İşlem başarısız: ",
+
+    friends_heading: "Arkadaşlar",
+    friends_search_heading: "Kullanıcı Ara",
+    friend_search_placeholder: "Rumuz ile ara...",
+    btn_search: "Ara",
+    incoming_requests_heading: "Gelen İstekler",
+    btn_accept: "Kabul Et",
+    btn_reject: "Reddet",
+    no_pending_requests: "Bekleyen istek yok.",
+    outgoing_requests_heading: "Gönderdiğim İstekler",
+    status_pending: "bekliyor",
+    no_sent_requests: "Gönderilmiş istek yok.",
+    my_friends_heading: "Arkadaşlarım",
+    no_friends_yet: "Henüz arkadaşınız yok.",
+    btn_chat: "💬 Sohbet Et",
+    no_results_found: "Sonuç bulunamadı.",
+    btn_send_request: "İstek Gönder",
+    btn_sent: "Gönderildi",
+    err_request_failed: "İstek gönderilemedi: ",
+
+    user_not_found: "Kullanıcı bulunamadı.",
+    chat_input_placeholder: "Mesaj yaz...",
+    btn_send: "Gönder",
+    no_messages_yet: "Henüz mesaj yok, ilk mesajı sen yaz.",
+    edited_tag: "düzenlendi",
+    err_message_edit_failed: "Mesaj düzenlenemedi: ",
+    err_message_send_failed: "Mesaj gönderilemedi: ",
+    confirm_delete_message: "Bu mesajı silmek istediğinize emin misiniz?",
+
+    destek_heading: "Destek",
+    destek_desc: "Kural ihlalleri, hatalı içerikler ya da teknik sorunlar için site yönetimiyle iletişime geçin.",
+    label_subject: "KONU",
+    subject_placeholder: "Örn: Kural ihlali yapan kullanıcı, Hatalı sayfa...",
+    label_detail: "DETAYLI AÇIKLAMA",
+    detail_placeholder: "Lütfen durumu detaylıca açıklayın...",
+    btn_send_support: "Destek Talebini Gönder",
+    err_support_failed: "Destek talebi iletilemedi: ",
+    support_success: "Destek talebiniz site yöneticisine iletilmiştir. Geri bildiriminiz için teşekkürler.",
+
+    admin_heading: "Yönetim Kontrol Paneli",
+    admin_sync: "Veriler senkronize ediliyor...",
+    mod_applications_heading: "Moderatör Yetki Başvuruları",
+    no_applications: "Kayıtlı başvuru formu yok.",
+    system_logs_heading: "Sistem Logları & Bildirimler",
+    inbox_clean: "Gelen kutusu temiz.",
+    role_sufficient: "Mevcut rolünüz işlem için tam yetkiye sahip.",
+    request_status: "Talep Durumu:",
+    application_form_heading: "Yetki Talep Formu",
+    label_application_reason: "BAŞVURU GEREKÇESİ VE DENEYİMLER",
+    application_placeholder: "Bilgileri buraya girin...",
+    btn_submit_form: "Formu İlet",
+    contact_management_heading: "Üst Yönetime Mesaj İlet",
+    label_message_detail: "MESAJ DETAYI",
+    message_placeholder: "İletilecek veriyi yazın...",
+    btn_send_message: "Mesajı Gönder",
+    msg_sent_to_management: "Mesaj üst yönetime transfer edildi.",
+    status_kabul: "kabul",
+    status_red: "red",
+    status_beklemede: "beklemede",
+
+    setup_complete_btn: "Kurulumu Tamamla",
+    err_nickname_taken: "Bu benzersiz rumuz sistemde zaten kayıtlı.",
+
+    footer_text: "© 2026 STRUD WEB — Tüm Hakları Saklıdır. | MKB",
+    capacity_full_title: "Kişi Kapasitesi doldu.",
+    label_image_url_2: "EK FOTOĞRAF URL 2 (Opsiyonel)",
+    label_image_url_3: "EK FOTOĞRAF URL 3 (Opsiyonel)",
+    label_hashtags: "ETİKETLER (virgülle ayırın)",
+    hashtags_placeholder: "zombie, multiplayer, jumpscare",
+    label_rating: "PUANINIZ (Opsiyonel)",
+    rating_none: "Puan verme",
+    label_is_spoiler: "Bu gönderi spoiler içeriyor",
+    btn_reveal_spoiler: "⚠️ Spoiler İçeriyor — Göstermek İçin Tıkla",
+    spoiler_tag: "SPOILER",
+    capacity_full_desc: "Daha sonra tekrar deneyin.",
+    btn_retry: "Tekrar Dene",
+    btn_load_more: "Daha Fazla Yükle",
+    loading_more: "Yükleniyor...",
+    nav_bildirimler: "Bildirimler",
+    notif_empty: "Henüz bildiriminiz yok.",
+    notif_new_message: "Yeni mesaj",
+    btn_mark_all_read: "Tümünü Okundu Say",
+  },
+  en: {
+    lang_gate_sub: "Select a language to continue",
+    lang_tr: "Türkçe",
+    lang_en: "English",
+
+    auth_sub: "Sign In",
+    label_nickname: "NICKNAME",
+    label_email: "GMAIL ADDRESS",
+    email_note: "* Only 1 account can be created per Gmail address.",
+    label_password: "PASSWORD",
+    btn_create_account: "Create Account",
+    btn_login: "Log In",
+    btn_resend_confirmation: "Resend Confirmation Email",
+    toggle_have_account: "Already have an account?",
+    toggle_login_link: "Log in",
+    toggle_no_account: "Don't have an account?",
+    toggle_signup_link: "Sign up",
+    err_gmail_only: "Only @gmail.com email addresses are accepted.",
+    err_gmail_plus_limit: "You can open at most 2 accounts with this email: name@gmail.com or name+2@gmail.com",
+    err_nickname_short: "Nickname must be at least 3 characters.",
+    signup_pending_msg: "Account created. You can log in after clicking the confirmation link sent to your email.",
+    err_email_unconfirmed: "This email has not been confirmed yet.",
+    switch_to_other_lang: "Türkçe",
+
+    nav_ana_sayfa: "Home",
+    nav_destek: "Support",
+    nav_admin: "Admin Panel",
+    nav_arkadaslar: "Friends",
+    btn_logout: "Log Out",
+    role_founder: "FOUNDER",
+    role_admin: "ADMIN",
+
+    cat_oyun: "Horror Games",
+    cat_film: "Horror Movies",
+    cat_video: "Horror Videos",
+    cat_sohbet: "Discussions",
+    cat_topluluk: "Community",
+
+    home_hero_title: "STRUD COMMUNITY PLATFORM",
+    home_hero_desc: "Welcome to an independent sharing and discussion network centered on horror and gaming culture. Use the operational panels below to learn about the community infrastructure.",
+    home_feat1_title: "Custom Categories",
+    home_feat1_desc: "Showcase your posts in the right place with Games, Movies, and the brand new \"Community\" category.",
+    home_feat2_title: "Photo & Video Links",
+    home_feat2_desc: "Enrich your posts by adding photo and video URLs (YouTube included).",
+    home_feat3_title: "Advanced Sorting",
+    home_feat3_desc: "Browse content without getting lost using Popular (most liked), Trending (most engaged), and New filters.",
+    home_feat4_title: "Authorization Network",
+    home_feat4_desc: "A moderation and reporting hierarchy protected by secure database rules (RLS) and an application-based system.",
+    home_explore_btn: "Explore the Community",
+
+    stats_loading: "Gathering metrics...",
+    stats_category_posts: "Category Posts",
+    stats_image_count: "With Image",
+    stats_video_count: "With Video",
+    new_post_heading: "Create New Post",
+    label_post_title: "POST TITLE",
+    post_title_placeholder: "Enter a title...",
+    label_post_content: "CONTENT DETAILS",
+    post_content_placeholder: "Enter description text...",
+    label_game_store_link: "GAME STORE PAGE URL (STEAM / EPIC ETC.)",
+    game_link_placeholder: "game link URL",
+    label_movie_review_link: "MOVIE REVIEW / IMDB LINK",
+    movie_link_placeholder: "https://www.imdb.com/title/...",
+    label_image_url: "PHOTO URL (Optional)",
+    image_url_placeholder: "Photo link URL",
+    label_video_url: "VIDEO URL (Optional)",
+    video_url_placeholder: "Video link URL (YouTube included)",
+    btn_publish_post: "Publish Post",
+    search_placeholder: "Search by keyword or author...",
+    filter_all: "All",
+    filter_images: "Images",
+    filter_videos: "Videos",
+    sort_new: "New",
+    sort_popular: "Popular",
+    sort_trend: "Trending",
+    db_scanning: "Scanning database...",
+    empty_no_data: "No records match the criteria.",
+    store_link_btn: "🛒 Go to Store Page",
+    review_link_btn: "🎬 Review / IMDb Source",
+    favorite_btn: "Favorite",
+    report_btn: "🚩 Report",
+    delete_btn: "Delete",
+    edit_btn: "Edit",
+    save_btn: "Save",
+    cancel_btn: "Cancel",
+    confirm_delete_post: "Are you sure you want to delete this record?",
+    report_prompt: "Reason for report?",
+    report_success: "Report has been submitted to the system.",
+    err_action_failed: "Action failed: ",
+
+    friends_heading: "Friends",
+    friends_search_heading: "Search Users",
+    friend_search_placeholder: "Search by nickname...",
+    btn_search: "Search",
+    incoming_requests_heading: "Incoming Requests",
+    btn_accept: "Accept",
+    btn_reject: "Reject",
+    no_pending_requests: "No pending requests.",
+    outgoing_requests_heading: "Sent Requests",
+    status_pending: "pending",
+    no_sent_requests: "No sent requests.",
+    my_friends_heading: "My Friends",
+    no_friends_yet: "You don't have any friends yet.",
+    btn_chat: "💬 Chat",
+    no_results_found: "No results found.",
+    btn_send_request: "Send Request",
+    btn_sent: "Sent",
+    err_request_failed: "Failed to send request: ",
+
+    user_not_found: "User not found.",
+    chat_input_placeholder: "Type a message...",
+    btn_send: "Send",
+    no_messages_yet: "No messages yet, be the first to write one.",
+    edited_tag: "edited",
+    err_message_edit_failed: "Failed to edit message: ",
+    err_message_send_failed: "Failed to send message: ",
+    confirm_delete_message: "Are you sure you want to delete this message?",
+
+    destek_heading: "Support",
+    destek_desc: "Contact site management for rule violations, faulty content, or technical issues.",
+    label_subject: "SUBJECT",
+    subject_placeholder: "E.g: User violating rules, Broken page...",
+    label_detail: "DETAILED DESCRIPTION",
+    detail_placeholder: "Please describe the situation in detail...",
+    btn_send_support: "Send Support Request",
+    err_support_failed: "Failed to submit support request: ",
+    support_success: "Your support request has been sent to the site administrator. Thank you for your feedback.",
+
+    admin_heading: "Management Control Panel",
+    admin_sync: "Syncing data...",
+    mod_applications_heading: "Moderator Authorization Applications",
+    no_applications: "No application forms on record.",
+    system_logs_heading: "System Logs & Notifications",
+    inbox_clean: "Inbox is clean.",
+    role_sufficient: "Your current role already has full authority for this action.",
+    request_status: "Request Status:",
+    application_form_heading: "Authorization Request Form",
+    label_application_reason: "APPLICATION REASON AND EXPERIENCE",
+    application_placeholder: "Enter details here...",
+    btn_submit_form: "Submit Form",
+    contact_management_heading: "Send Message to Management",
+    label_message_detail: "MESSAGE DETAILS",
+    message_placeholder: "Write the message to send...",
+    btn_send_message: "Send Message",
+    msg_sent_to_management: "Message has been transferred to management.",
+    status_kabul: "accepted",
+    status_red: "rejected",
+    status_beklemede: "pending",
+
+    setup_complete_btn: "Complete Setup",
+    err_nickname_taken: "This unique nickname is already registered in the system.",
+
+    footer_text: "© 2026 STRUD WEB — All Rights Reserved. | MKB",
+    capacity_full_title: "Capacity full.",
+    label_image_url_2: "EXTRA PHOTO URL 2 (Optional)",
+    label_image_url_3: "EXTRA PHOTO URL 3 (Optional)",
+    label_hashtags: "HASHTAGS (comma separated)",
+    hashtags_placeholder: "zombie, multiplayer, jumpscare",
+    label_rating: "YOUR RATING (Optional)",
+    rating_none: "No rating",
+    label_is_spoiler: "This post contains spoilers",
+    btn_reveal_spoiler: "⚠️ Contains Spoilers — Click to Reveal",
+    spoiler_tag: "SPOILER",
+    capacity_full_desc: "Please try again later.",
+    btn_retry: "Try Again",
+    btn_load_more: "Load More",
+    loading_more: "Loading...",
+    nav_bildirimler: "Notifications",
+    notif_empty: "You have no notifications yet.",
+    notif_new_message: "New message",
+    btn_mark_all_read: "Mark All as Read",
+  },
+};
+
+function t(key){
+  return (currentLang && I18N[currentLang] && I18N[currentLang][key]) || key;
+}
+
+function setLang(lang){
+  currentLang = lang;
+  localStorage.setItem('strud_lang', lang);
+  document.documentElement.lang = lang;
+  render();
+}
+
+function renderLangToggleHtml(id){
+  return `<div style="text-align:center;margin-top:14px;"><span class="edit-msg-btn" id="${id}">${t('switch_to_other_lang')}</span></div>`;
+}
+function attachLangToggle(id){
+  const el = document.getElementById(id);
+  if(el) el.onclick = () => setLang(currentLang === 'tr' ? 'en' : 'tr');
+}
+
+/* ================= KATEGORİLER ================= */
+const CATEGORY_KEYS = ['oyun', 'film', 'video', 'sohbet', 'topluluk'];
+function catLabel(key){ return t('cat_' + key); }
+
+let currentUser = null;
+let currentProfile = null;
+let allFetchedPosts = [];
+let dmChannel = null;
+let activeChatFriendId = null;
+let feedChannel = null;
+let adminChannel = null;
+let friendReqChannel = null;
+let globalMsgChannel = null;
+let notifications = [];
+const FEED_PAGE_SIZE = 20;
+let feedHasMore = true;
+let feedLoadingMore = false;
+let capacityFull = false;
+let heartbeatInterval = null;
+const CAPACITY_LIMIT = 1700;
+
+// Filtreler & Sıralama
+let currentMediaTypeFilter = 'all';
+let currentSortMode = 'yeni'; // yeni, populer, trend
+let currentSearchQuery = '';
+
+const navlinksEl = document.getElementById('navlinks');
+const authbarEl = document.getElementById('authbar');
+const mainEl = document.getElementById('main-content');
+
+function escapeHtml(str){
+  return String(str ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function extractYouTubeId(url) {
+  if(!url) return null;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : null;
+}
+
+function timeAgo(dateStr){
+  const d = new Date(dateStr);
+  const diff = Math.floor((Date.now() - d.getTime())/1000);
+  if(currentLang === 'en'){
+    if(diff < 60) return 'just now';
+    if(diff < 3600) return Math.floor(diff/60)+' min ago';
+    if(diff < 86400) return Math.floor(diff/3600)+' hr ago';
+    return d.toLocaleDateString('en-US');
+  }
+  if(diff < 60) return 'az önce';
+  if(diff < 3600) return Math.floor(diff/60)+' dk önce';
+  if(diff < 86400) return Math.floor(diff/3600)+' sa önce';
+  return d.toLocaleDateString('tr-TR');
+}
+
+function currentRoute(){
+  const h = window.location.hash.replace('#','').replace('/','');
+  return h || 'ana-sayfa';
+}
+
+function isAdminOrFounder(){
+  return currentProfile && (currentProfile.role === 'admin' || currentProfile.role === 'founder');
+}
+function isFounder(){
+  return currentProfile && currentProfile.role === 'founder';
+}
+
+/* ---------------- AUTH ---------------- */
+async function loadProfile(userId){
+  const { data, error } = await supabase.from('profiles').select('id, nickname, role').eq('id', userId).maybeSingle();
+  if(error){ console.error(error); return null; }
+  return data;
+}
+
+async function refreshSession(){
+  const { data: { session } } = await supabase.auth.getSession();
+  if(session){
+    currentUser = session.user;
+    currentProfile = await loadProfile(currentUser.id);
+    if(!currentProfile){
+      const pendingNickname = localStorage.getItem('strud_pending_nickname');
+      if(pendingNickname){
+        const { error } = await supabase.from('profiles').insert({ id: currentUser.id, nickname: pendingNickname });
+        localStorage.removeItem('strud_pending_nickname');
+        if(!error){ currentProfile = await loadProfile(currentUser.id); }
+      }
+    }
+    await requestActiveSlot();
+    startHeartbeat();
+    notifications = await fetchNotificationsFromDB();
+    updateTabTitleBadge();
+    requestNativeNotificationPermission();
+    startGlobalMessageListener();
+    startFriendRequestListener();
+  } else {
+    currentUser = null;
+    currentProfile = null;
+    capacityFull = false;
+    notifications = [];
+    stopHeartbeat();
+    stopGlobalMessageListener();
+    stopFriendRequestListener();
+    stopFeedRealtime();
+    stopAdminRealtime();
+    updateTabTitleBadge();
+  }
+  render();
+}
+
+/* ---------------- BİLDİRİMLER (ARKADAŞ MESAJLARI) ---------------- */
+const NOTIF_SOUND_URI = "data:audio/mpeg;base64,SUQzBAAAAAABEFRYWFgAAAASAAADbWFqb3JfYnJhbmQAaXNvNABUWFhYAAAAEQAAA21pbm9yX3ZlcnNpb24AMABUWFhYAAAALAAAA2NvbXBhdGlibGVfYnJhbmRzAGlzbzRpc29tb2JzMWlzbzJhdmMxbXA0MQBUU1NFAAAADwAAA0xhdmY2MC4xNi4xMDAAAAAAAAAAAAAAAP/zcMAAAAAAAAAAAABJbmZvAAAADwAAAHYAAEj0AAYICw0PExUXGhweIiQnKSsvMTM2ODo+QEJFR0tNT1FUVlpcXmFjZ2lrbXBydnh6fH+DhYeJi46SlJaYm52ho6Wnqq6wsrS2ub2/wcPGyszO0NLV2dvd3+Hm6Ors7vD19/n7/QAAAABMYXZjNjAuMzEAAAAAAAAAAAAAAAAkAlMAAAAAAABI9O25CB8AAAAAAAAAAAAAAAAA//NgxAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NixG8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsRvAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82LEbwAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NgxHAAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NixG8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsRvAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82LEbwAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NgxHAAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NixG8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsRvAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82LEbwAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NgxHAAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NixG8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsRvAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82LEbwAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NgxHAAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NixG8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsRvAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82DEcAAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82LEbwAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NixG8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsRvAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82DEcAAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82LEbwAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NixG8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsRvAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82DEcAAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82LEbwAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NixG8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsRvAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82DEcAAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82LEbwAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVIFllixZTTsliGDcCAEAIAcJlTsliWDQGgNAaCQTDAQAIAZwHcDODnEPIWo4+73veGxq9Xq9QIYhisiQ2NPoeXAnBODQUDJrDxXqNXs8ffy/TiGKBk0xq9Xv6UeRKe9/e973ve+//iAwKxkif5hsa//NixG8AAANIAAAAAH0PQ9RqBDEMZIKfQ9Vthbydmmh6vj4gRH7+Pujx5VPkEHoIQXBUZT5zmmTgnBODogl/HrLm5p9D1e/viAwKxD0PQ85zTNM01HOxq9/H3ijyl37/bAhhoHQyYp7/+GrzQNA0FBMxoeh7nneKUpSlL3ve973vSlKe98Kw0ydlzNNRs79jNMTQTQTQTQTQTQeguP/zYMT/QAwU9C1MeAA4KiQAfAGIga134GrBgddB4BYwDeo/wM2lsDCZIAzwOvwNQEoDBY9AxWAf8DGYNAMBQWkAYWBX/gmFQMQgUDH4PAwEGAGAx//gSHgGCQKO4G7gLAgGxsDB4P///ASDgMTAoDIgUAwGGQGA2Dg+BYAA3eCgD////xZINiwMOgMBASAKEgDBEAKBYgoFzgzIuP/zYsSNOmQWQKOUqADFyBxf////+Fj4EguGADUiA+xcYCgDBvQBgAASDAXPkMFKDrIn//////+GoBaCAMGwMQgkGgIAUCAGFgECEBgNAcDC4DAoCADgwBhwAAJAIfcLmxnBkAbBgYNBgHolxsWrEiAbR3gbQBIYywlQBpAdTJNXCShYCRXXxhlnT66/jlGMMYeZG9XxhSYS49iKOAf/82LEMx+DbpgBjWgAj9X+I0MUaRkDeMMO0mE71//yeOwuEIeIlo+D3Pmp82Lvq///5eJIzNGTMGKRdJEwL7njf/////LxIlRwpF0xNTJRsXTE0PpU0i6cISrJUgVBME1iRPyIHL/zfL99Ltwm2rpD4v9mnOIAiK+S5BejWOaw8YKfkU/yNkba3/yN8jKvmIRT6s4gKSEVBd532KRp//NixEUd67WQNckoARpFcPnOICjKL1O6ChadJ9X+cXEBRlV2D4vXZvn/+ou5ORhMPjyDRcPj2wdOkcAOhgDv5YAN768QnZCePE3d/phABMy4iE5kHcOaBxbFEd3f/9w7n6FHeE5yoXxLEhbu7v8LQnOGiFXabn8RNygATufu+hafonEc0r5V+uVMIAUO/n2E75H9A3hfN3dzd4lf9P/zYMRdHNOiAUAIRgMunvCQsII/cn00EIwdJQR4zAACIj8GVQtq6//6KSPxKHYs7IsWZjQkSd3BqHniyggXStdw3viJYBAT4gCV637+cqWFK1TGMMiCHBrQfJc7zLreBxI+789zKMT0MOxAqCdizLHDeha76QC36cjKVY2AOplZduLyiHKVh8HuXNRFr9bmETfBe7AHESgTQTxzvf/zYsR4OCuSUZTLEayBIUks/M1xYbVhIPi/C+B9GE4fjggCGbCQ53ZUzfTk8eB8Y7jtcWDtpZnYcExknx0YSk9JV+F5xZSnZ1KJyYnfvA5oHYmBWcKEGT/u9////LpLxN/wp6VzfwZN7wWHghh+IQcv/400H3KPpzsOSIYKZYZkRFBDMwQsJapZPAsCpfA/vpJyyix34n86eG4fdyj/82LEJyfrJoAAywcYkw2mXYaGx2UoDt9EvTHhIUWxY6QxGNbPuK2UFsJwUdcYYifXr4CZ+xp0LpxxCLVW/PF8CykwV2m3ttKfRydYWMHE9qE5kziWIEFm6K7UmRiMnQj+o/8tPQnRegBeaOmQoj+I7//o7/7siAz62eZtQ8Wag11Am/mYrdlvC5qCYxKl/Bdk5yxZ9jCZxKBDLTnl//NixBckorKUyspK3KWnf2OvVPww/7+h8EUhhAhQKo/SQjEQeEAugSmt21hMJ46wdSRHrJDaZq0p0jmhdUy0RQ2fkZFWGjJiRzonzT/ekhSEb3dO84DmDqEGMSOlKRHrK5LlZ70/X7TNdX6ruXbxQWMiZoYDqblF2CiNSkowHy9LY5A9DyRSyaXQVSVh7Uy+DLjK4AkcNloGiYNsA//zYMQUHtE6nCTCTFFPsQBrFUJKm53Ok8woIABMF7JF+/y9K5xmwxycoIsrXd+2ncprOlE5VJRk/ZJ+1dmi0f+rc6Lnv8l5l/X/Xd/lN+7f/8//+LCOSIdOQVSeJ6CeggO6upa9+TfqF17iYcGJcP6p9ZtllVgNAAdyWCOl4CGkgI9PncuFyMKCgeUeSJhAlQ6dxCeuaRAAMCBIcf/zYsQnIBFqnCR6THQQ224FFO+2Smej6119X09otC2fdctfA5vE9i6rCzcOoTgNwjDShO4KRqHpkAY2oEZQ+hJQoMaNBsagKDwg42beWpFUt2N8AwzuUnInmAKxaHhUYLCIWOOgKtUCFgRbO8LuUuKjQBE8lCkumQ/HxiuXD2WR1SUPERyfIX3quqdBj0a1qzcWZRwi69U6sNfy33v/82LENh8JLqGEewxZ5mEvH3iFLnINOsYY/vTPYBN3+nlHTugvL7d/k9fnfZ2wimZ02PkPsGdDbm9nm1Xu3/PJjDte3m9hfr9HLetHF+f+/6FffSrAzCdjgNIOsnRpH6eDGjxojBc4mQESqODUaWk25A9NEcEys11hJY8jnLDY4ALIEzRxowECBgAIECmqeDN+OqwrD/KTVacVqFQJ//NixEkegTqgDHpEWaAnTIow8JZ999T/hU8TfcGEPYMyz3coWd0avVdP/63b/X/93ft3//2uZy/dbua7X/0FiehWCLqknT4CYBBUhE9LCjWCSvjeRu/N9QvexqcSxRxlkXDctn+Xxn20pnzDv8eR5YS2yu0IPuK6mkShfx7nxDvEf/7d297gS7vEkeM+0619f7r/7yTVxIEc712aY//zYMRfHUD6nAR7DD9hr9aU2xrX+vz3+7+czDprvzqwBTfmChgVA9RWl+FkSpxNSKokzA8XpziIYQHXx4Zq21BdVqEPCGGRyXi7t6F5Wo1sxRNhbn1KkCsm8Jw28s6B63zu8Ph35hSBCH19amn7uLXXddIaEzR1IxjXs1jz5qAJwaKix5QjOjF2REqrrWuq1ytVyLrTNz+1J1NwFv/zYsR5HjG2mAJ7DHYBz0FJRCqLcZC8d5zJk8GhTL0QQg+xSJDTD0S8lB0ZQIF5qoUNPfk7GHqX0IHoUGDmJDo3LgpXUDLhHTzBi/zFJ7ZlCp4t+jkD7BHS5JcVECKkC9UNupaIJIQuKZyxxCX2r5Aaks5NQVH5IttSoUlTiw4NLOEZAgbqMITbGG6rTMpQgSrIxL6I6A4p9CKtHBL/82LEkB4RppwEekaU1HDOKKSvWGdymElmWO05pRaH0zO84aF6nlUoIBDGwEKcGcENqjpTTv9ofII128Zc6tel5kvXQ+TuiIwX6vhforrN3fv7IuZV/3xc/2PAFL/Jz56Teebjd89J/ye/R7+dniAu+JSmTTMEUkhB9r6id1aJ1O+VSoblf2twfx422uu3D7fzSNEr+asijicsGl3K//NgxKcd8TKgrMJGXSE9ClXUQTw11RShaEke801w69XcerIy7tRreqO5Vxx1EWPGCaG2jhE+rc5XSkESQu8ivpTW5NqdPsyYCAo0weXaIIu0iSoYIhFwJzMJVAxcgKunXxrloYl80U/wfofUUKUuWmiEdvsu+s6BZDAtglZdbXLvCW6wjY9Z5vErLMCbqGERE+ZuhRQFxP3D2gAr//NixL4dIfqcDHjLKLX62IlqzJ67US19lUjvW7Hyk2W6OzXc1P+q1mf2/5zzpf+vZ/XroqRJ1M1PzL7CGS4fYCMQgvoGTWE5csG0tKYHWO/eZvLbh5gO+oYVtc1yZqfUfq+sqssp1zumW1Dv7mb+83zc3D+INdRU3NDRTzTXUXNjZfW1NWjnWrsU5znXf5FrJqc59mI0je85zgi1QP/zYsTZHru6mMRiBU1DnuQAAAJV8gcERdCEUUJiYuhXfJvXPCycnWJFA3OnEayryCa7RAwoxNqdJm6IGIZWqOC4Jo6zjYnKYkmjliOc9YRjFRgwCXiua5IY5lInnOROmKIjIvFSVliFFekzKIcEYxVU4zTQGtBMYiYaIMIxjeb9uUUQEEZItr1hViIRBzGkvK8vA/C36epxDT3OuFD/82LE7ihUDpzCWVPN0tS1oWJLun8tG3WYsCHE3dkvh/XyWxS1MKgyHOkFXON9s8f4riuEPgKdy0lFvLJmOl2RVqRgM1cVUbqyffLMJGqc61QfhAAiFGh6PUkyjyqHJkEkiuCsq/rpgV6nSB0QkIRC+7iORPyVEuO8lBVslMUpVxW8Wsh5YK7izVR8Gu8ZviAYkdppSANMnQR9SNCl//NgxNw5fBakykmfDFqhmuvGykxwJ/YuiI7Z4qwIGOCRYLoKZwc6cDWohBG6Ddefl89V/tHGIHzlfyqGGWSCXyizUhtg8W8wVlB/6hY71kFiheLA5iOSwbgcA4SDgprlAN0E6jgdjyYCASjiEr4L0ba2SXApMCuZrj0sjqfLMbfQlzsBfLT6I2lilm/mlHkx16suLX+YN1STqT/c//NixIU5NBapQMMfPE27tYMRYpjAcWDgmLYDM6O2mjtPq61Jcw4gdqry9lZq1rrl+Skl7f2tCh6gL9oSmiHdBT71viwJ801PeBCzf1zLEtPSP3rXPC3Anw+iPmCK+VFUMrLDZXzHtsur39j0mgiXMQ+S1J+OVRoYyMDY2bOkJoYKTSCvtGJBEMisVDQrYZJyMgOoygMEaVMxW006XP/zYsQwKuwWvgh6UNw+hXbhBwUbZuJxZlpwXkWZVdD5uZhqayUaieX/1HnI/WxceuIqaEEPloaSSKmen/lDq6+KPQfZRrLSkV8b/ESczls0ZRyXJ8KVbjJMISTxrUkwHJv/91016DIkYUtynesvedxXxFVNRwNmbjL+x8ciEHt0oej0EEMCVih9GTh1KOtSoau217bcKwwCwmVNjSP/82LEFCDx7slgelB85CiSYC47FV0JNiBobVpJBLEmqD9RGlirz5m3waXLxYqpOmbunUzFzyR1WEcKkFXChsaxk3Sv3eXaMEJwRtH/BDy/mxICByA5WSzMgLAcPnzoBdMqAJkyXHRMy1yU4oRGtYDdDVUgd8QLA5a4+MX2OXgUMFweHJ5Bqlr53hWJq11xXQqUEgzWY3DYjtILZuPj//NgxCAna3LFQGLRxfGgM4UN0Eu9iCv2bKfuxvtvlH69Wi36lzu/y6MCpfV03fo5lZ29nHSoR0DOw18pmjyAc/dIBgdP3+oPN6MQKcTKj3EKtsbo1/uH/R/+nJcmzFtFjouuvDJE3M/1a3FV9f2KKix/3DzdVRZZr3SjEEwPV4mg4ki+FbbbEG3/giYpMWVCpGa1Fa+fV7takmwW//NixBEjk1bSAEoLxUKUubMVLozGRIlTkYahkdQ/32NnNNdiHmjIv++i2W1/4DYLOh7Qy+k45nuBrELRnGmabrBpc5pQtAjWxFewxJlRvRFOwZrhYF3/+35F1WUZ1OttGV1dVc6qa7jCELHTui07EQiKA5ziJh+g9h1ZCLHLUjM/9mZL9QAYC/z56k4kUycUIpGoPjqXjYlSnrokq//zYsQSHPte0WBJirXgKS+gatmcqqsd/PvLHqSwym7nuzWeaQMDdwmFy/lWvU0Nouqh2OFseiVLqo1kBbHXtagYai9v62eje03yrqUrz9DoWdvIS+qq2Q7oxtQkDr4Ut3MNF6xLljegD9EnxI/8G060gSEbRx/IG2ZzzOm5YrkzVdFD2gOTVWiasvKuuhrsKeQDo5OYcBbeFkI2Uwr/82LELhsCvtGASgS0qn1JMruwKfnUyifKzeTmOGb0GBAR2VxKAWu/tZ9Cu36ZGRz+EqsOi0iVBkOLGASDUwlw7c1hJyYb1jwAe4wExlKLGpF0Cqm6hVxE4uh3acWe6Y4aI6Ke73QaYWd/CIesW4QOvRp71mnhhR5xNdl+q59TcRhi8zW/n097+Vwgrj/8bpXp0853L2xaTzXL065f//NgxFIeG5bOIEoGrV/z8dP4cUvwmW8OBxa1jhd4hMUVSXdfNi90GOsF/xAjhpnmZ/g/SgHY4gsZYLdhQhaEyEeYbXXRwTTclrBcixlY1LGH/ye40374lRCs7qGE0QYsGJQ1JpwkJr/+c214TONSrxtf/+pw7+QpxYwJ0/hC7Q5sKDN/0vRUXXjc+KVIv1L+KAifubH7hp/TrKkt//NixGggA47KIEoG3anWE6tSzQX7fv6YU8O51PVQ5v/wpd2DWwKyAKDwoYB+5IzGQpeOeVMSjVsvnEFSZHFkLiyGNePC3NZaMYHLWwdeNMW7K3GOs1TnKSZM0pSMxiL9A85naXkDoiKIoUVMhnUrIkrt/CypqcLtMQzlRJmT2Q69NH6KEXWV2buoQMU6kflBkduU5arcy0qQNfE4ff/zYsR4HvOuxkBISwCBq/iaDnSWgMPwqAJ0C9caSuU49hKknWRNQYYNXDsz5FxdviWFLn1NCc6a6k05xRODE2+5vkLPj+plAMZSKGv/RakIxjKJeWZzP6AxZGqy+2clVdnR7HOysxfq9iu2/0XKrSlKSezkqzWZzcznQrehM1V3Ri0CiQlxVCbqCdTOmwAyhxBPXJ5ccUtVf2H2/tf/82LEjB3jysmQQcWEL2zGO2bWaiznHrzNmDeH8mZ5aROO6MxvR+pWdAc0dtVDFPWucj857HZGznIzn/zsy2aIz/qXOZUANAaNJ7oX+7s7BSs3RGn7/0Mv66oyK/6OSYx+iER/1bNacsxaIYpl2BHDhO9D+ToFqpONAFz0ho/2d2xAkaaXJqTuQJLNzOUfEuEZZyYhkHqgaE6yL3wW//NgxKQe48bOMmKFjBTFbhH8quNuU8ai3acrf8tsYmAw5UgLW18//w3/YQDv4V8m6lCAQ2GT/9WKR0KN85jb/7U0u+pEcodiNds72V/091o6Me6VYIoodpBLBinwxwbK9DGcKAMk/iUGNlZOB4uMH5hsSBtEVWRsse0oswlsORmCqyWEgCYdTb6SS7o01ojXJJtVdrvGRnXRiXtq//NixLcgw/bGRDIFHTW//7h0D8exmO95+3f7v///k0D5D/SMCqlD3lQ9AZMi59Qqu1D+WxdHW/ulRP4r/+HQ5WoiGbJpVp5I+mca+qtH4h3+w/Xy2WV7raSETWmuOJnwoeNKN0vyZXJ1frUSJIAFyg+KiZVa3Y0ujqZZBOqQXdRUjKVbmISIhXPJS5KuxqWGDYL8VXgE7DlhC2CU5f/zYsTEI9uSviBJlpy/+XngtRhIG5cq3+V/5QfFPjYH5Ej5cSdHUqU//6zHRvp+ryD759mVf//711/Ofx4qrUVR1mU9aO/zG+hVPtVNgAyEVCldlZSa6IvpcuKyhtGpaFGULg8gpQwa3GVaWpU3c+R5SSxMJclQb5fdNFSK0EUUVGJSRUbUETIpPZlvr0EUnBxOmCdBtGzFH+gk/a7/82DExByUBsG0SM8tamRIj3GQWtQooIt0cfUpkORyNfdrtRyqgsv5kZx2MHAAHXETiI5aCAfEmDSfRspeNyLfJ4kg3YOgIUELxR1iZn7ITUR/OJOOQpLFwkfGYN2fPoFjE9/PehTWtHN3GFW3rpMiXScR93km1to894ckq2bDpxmNoEUjjFZq2YsmLZyf7JtilXsYbLjsTUtXCRz/82LE4CZsDqziS0tQPf1P49k5zCQSXw6x8AUAPO19gPCler7tfy1F5oiun8fLPbnr1EDZl//1EH7TSHepK7LMPRszK0hGiv+GNpn/CreHcKT1xRWSVZ3InyshDO+HXyYjnw4fQjKiKuAiWAE4a1yZEFv5jLo1XnJPIa8zfommmINHGEHNtskNdAY6bwCS8sPvW4seaDAP5+tGHu3a//NixNYoI7asoGPXorajb2aPH/Q1SKA4JJwTAJ3MUz9BgT0G4sF9haCjJihmYIcTn6lOyOLiIwzf9aoznP/zqOwxEeKxy1PdmJbHW9FNZvqZ93fsx65UwV1GqeR2IlOO6nuv+cxpWr3AAAm8mCLc3x2s4jxHAOw5T2KknzeWgqjeUR0kgOQ1EIw9/WHdoaih9n58Nd2t2gbYOyJppP/zYsTFI6QOsgTBlJyrXYfAgGS5T6iWEm27dy7u/gF7EgJoPoar111BU8iRP5EgJgBhHnpw4H/X1H/0SlpVP03c8nblIrpFBDOiPIxSwQyI5/9W+voSr4RCmoggUVuoAcCOd4shji1PaiOcpGQAWrACKqCFKMDLQrIpSCxLniQhUMxIUSKXRIpWq0DCugIlWbqlqrHsfVnqpHG1QMD/82DExiX0DrTmegUdR7HqqNydY1/2rATqX///syr6qqgIEwoM1RuRmbaqzBjqozKV+/l1QEvLEioC4NHlAUOqf/hq0cDVShEDVoiBo8V8FgaDtUxBTUVVVVVAAqkKaks+bOonASZAeicbF6idcWqjWmYGQjPvwuis5UDPqxqM6dPLl5WVv0W7Son9EWrSoqo5WVtejzdH+js8E+z/82LEvRzafrWWMkYY5jFWhv/p6VEyoa4VSOz//+rVbZP5urQEKj4UaVnbSUOqTEFNRSJhEz7kfMcARwDIpBMCjB4iOERgBCyiJTGK0RLMHnlIZy6gMPb8rah1jOHjiv+lHLzK3/opaPIWCJ5CeCxKzEQjoDCYQgSdACZVdbPtFL5TSbNRxbYxjUq3+KSKTRYmVZInoVSGef///QqG//NixNIYm8Gs9jBE6JWAjgLsYxy//8KJDAwEhQQEBHE+AiZgYChgxtwmPZWWK0xBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsT7IvuxaNwqRchVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82DEcAAAAAAAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82LEbwAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NixG8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsRvAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82DEcAAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82LEbwAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NixG8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYMRwAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsRvAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82LEbwAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NixG8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYMRwAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsRvAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82LEbwAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NixG8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYMRwAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsRvAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82LEbwAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NixG8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYMRwAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsRvAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82LEbwAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NgxHAAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NixG8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsRvAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82LEbwAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NgxHAAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NixG8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsRvAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82LEbwAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NgxHAAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NixG8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsRvAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82LEbwAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NgxHAAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NixG8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsRvAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82LEbwAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NgxHAAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NixG8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zYsRvAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/82DEcAAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVU=";
+let notifAudioEl = null;
+
+function primeNotifAudio(){
+  if(!notifAudioEl){
+    notifAudioEl = new Audio(NOTIF_SOUND_URI);
+    notifAudioEl.volume = 0.8;
+    notifAudioEl.load();
+  }
+  document.removeEventListener('click', primeNotifAudio);
+}
+document.addEventListener('click', primeNotifAudio);
+
+function playNotificationSound(){
+  try {
+    if(!notifAudioEl){
+      notifAudioEl = new Audio(NOTIF_SOUND_URI);
+      notifAudioEl.volume = 0.8;
+    }
+    notifAudioEl.currentTime = 0;
+    notifAudioEl.play().catch(() => { /* tarayıcı izin vermediyse sessizce yoksay */ });
+  } catch(e){ console.error(e); }
+}
+
+async function fetchNotificationsFromDB(){
+  const { data, error } = await supabase
+    .from('notifications')
+    .select('id, sender_id, content, created_at, profiles!notifications_sender_id_fkey(nickname)')
+    .eq('user_id', currentUser.id)
+    .order('created_at', { ascending: false });
+  if(error){ console.error(error); return []; }
+  return (data || []).map(n => ({
+    id: n.id,
+    senderId: n.sender_id,
+    nickname: n.profiles?.nickname || '?',
+    content: n.content,
+    created_at: n.created_at,
+  }));
+}
+
+function startGlobalMessageListener(){
+  stopGlobalMessageListener();
+  globalMsgChannel = supabase.channel('inbox-' + currentUser.id)
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'notifications', filter: `user_id=eq.${currentUser.id}` }, async (payload) => {
+      const row = payload.new;
+      const viewingThisChat = (currentRoute() === 'dm/' + row.sender_id);
+      if(viewingThisChat){
+        // Bu sohbet zaten açık, bildirimi hiç göstermeden veritabanından temizle
+        await supabase.from('notifications').delete().eq('id', row.id);
+        return;
+      }
+
+      const { data: senderProfile } = await supabase.from('profiles').select('nickname').eq('id', row.sender_id).maybeSingle();
+      const nickname = senderProfile?.nickname || '?';
+      notifications.unshift({
+        id: row.id,
+        senderId: row.sender_id,
+        nickname,
+        content: row.content,
+        created_at: row.created_at,
+      });
+      playNotificationSound();
+      renderNav();
+      updateTabTitleBadge();
+      showNativeNotification(nickname, row.content);
+      if(currentRoute() === 'bildirimler'){ renderNotifications(); }
+    })
+    .subscribe();
+}
+
+function stopGlobalMessageListener(){
+  if(globalMsgChannel){ supabase.removeChannel(globalMsgChannel); globalMsgChannel = null; }
+}
+
+/* ---------------- ADMİNLİK GERÇEK ZAMANLI ---------------- */
+function startAdminRealtime(){
+  stopAdminRealtime();
+  adminChannel = supabase.channel('admin-' + currentUser.id)
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'admin_applications' }, () => {
+      if(currentRoute() === 'admin'){ renderAdmin(); }
+    })
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'founder_messages' }, () => {
+      if(currentRoute() === 'admin'){ renderAdmin(); }
+    })
+    .subscribe();
+}
+function stopAdminRealtime(){
+  if(adminChannel){ supabase.removeChannel(adminChannel); adminChannel = null; }
+}
+
+/* ---------------- ARKADAŞLIK İSTEKLERİ GERÇEK ZAMANLI ---------------- */
+function startFriendRequestListener(){
+  stopFriendRequestListener();
+  friendReqChannel = supabase.channel('friendreq-' + currentUser.id)
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'friend_requests', filter: `receiver_id=eq.${currentUser.id}` }, () => {
+      if(currentRoute() === 'arkadaslar'){ renderFriends(); }
+    })
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'friend_requests', filter: `sender_id=eq.${currentUser.id}` }, () => {
+      if(currentRoute() === 'arkadaslar'){ renderFriends(); }
+    })
+    .subscribe();
+}
+function stopFriendRequestListener(){
+  if(friendReqChannel){ supabase.removeChannel(friendReqChannel); friendReqChannel = null; }
+}
+
+/* ---------------- SEKME BAŞLIĞI ROZETİ ---------------- */
+let baseTabTitle = '';
+function updateTabTitleBadge(){
+  if(!baseTabTitle){
+    baseTabTitle = currentLang === 'en' ? 'Strud WEB — Horror Community' : 'Strud WEB — Korku Topluluğu';
+  }
+  document.title = notifications.length > 0 ? `(${notifications.length}) ${baseTabTitle}` : baseTabTitle;
+}
+
+/* ---------------- NATIVE (İŞLETİM SİSTEMİ) BİLDİRİMİ ---------------- */
+function requestNativeNotificationPermission(){
+  if('Notification' in window && Notification.permission === 'default'){
+    Notification.requestPermission();
+  }
+}
+
+function showNativeNotification(nickname, content){
+  if(!('Notification' in window)) return;
+  if(Notification.permission !== 'granted') return;
+  if(document.visibilityState === 'visible') return; // sekme zaten açık ve görünürken gösterme
+  try {
+    const n = new Notification(nickname, { body: content, icon: LOGO_URI });
+    n.onclick = () => { window.focus(); };
+  } catch(e){ console.error(e); }
+}
+
+/* ---------------- KAPASİTE (EŞZAMANLI KULLANICI SINIRI) ---------------- */
+async function requestActiveSlot(){
+  try {
+    const { data, error } = await supabase.rpc('request_active_slot');
+    if(error){ console.error(error); return; }
+    capacityFull = (data === 'full');
+  } catch(e){ console.error(e); }
+}
+
+async function releaseActiveSlot(){
+  try { await supabase.rpc('release_active_slot'); } catch(e){ console.error(e); }
+}
+
+function startHeartbeat(){
+  stopHeartbeat();
+  heartbeatInterval = setInterval(async () => {
+    if(!currentUser) return;
+    await requestActiveSlot();
+    if(capacityFull){ render(); }
+  }, 45000);
+}
+
+function stopHeartbeat(){
+  if(heartbeatInterval){ clearInterval(heartbeatInterval); heartbeatInterval = null; }
+}
+
+function renderCapacityFullScreen(){
+  navlinksEl.innerHTML = '';
+  authbarEl.innerHTML = '';
+  mainEl.innerHTML = `
+    <div class="auth-wrap">
+      <img src="${LOGO_URI}" alt="Strud WEB logo" class="auth-logo">
+      <h1>STRUD WEB</h1>
+      <div class="auth-sub" style="margin-bottom:16px; line-height:1.6;">
+        ${t('capacity_full_title')}<br>
+        <span style="color:var(--text-dim); font-size:12.5px;">${t('capacity_full_desc')}</span>
+      </div>
+      <button type="button" class="btn" id="capacityRetryBtn" style="width:100%;">${t('btn_retry')}</button>
+    </div>
+  `;
+  document.getElementById('capacityRetryBtn').onclick = async () => {
+    await requestActiveSlot();
+    render();
+  };
+}
+
+let authMode = 'login';
+let authError = '';
+let unconfirmedEmail = '';
+
+function renderLanguageGate(){
+  mainEl.innerHTML = `
+    <div class="auth-wrap">
+      <img src="${LOGO_URI}" alt="Strud WEB logo" class="auth-logo">
+      <h1>STRUD WEB</h1>
+      <div class="auth-sub">Dilinizi seçin / Select your language</div>
+      <div class="lang-btn-row">
+        <button type="button" class="btn" id="langBtnTr">Türkçe</button>
+        <button type="button" class="btn" id="langBtnEn">English</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('langBtnTr').onclick = () => setLang('tr');
+  document.getElementById('langBtnEn').onclick = () => setLang('en');
+}
+
+function renderAuthScreen(){
+  mainEl.innerHTML = `
+    <div class="auth-wrap">
+      <img src="${LOGO_URI}" alt="Strud WEB logo" class="auth-logo">
+      <h1>STRUD WEB</h1>
+      <div class="auth-sub">${t('auth_sub')}</div>
+      <form id="authForm">
+        ${authMode === 'signup' ? `
+        <div class="field">
+          <label>${t('label_nickname')}</label>
+          <input type="text" id="f-nickname" required maxlength="24">
+        </div>` : ``}
+        <div class="field">
+          <label>${t('label_email')}</label>
+          <input type="email" id="f-email" placeholder="ornek@gmail.com" required>
+          <div style="font-size:10px; color:var(--sick-bright); margin-top:6px; font-family:'IBM Plex Mono',monospace;">${t('email_note')}</div>
+        </div>
+        <div class="field">
+          <label>${t('label_password')}</label>
+          <input type="password" id="f-password" required minlength="6">
+        </div>
+        <button type="submit" class="btn" style="width:100%;">${authMode === 'signup' ? t('btn_create_account') : t('btn_login')}</button>
+        ${authError ? `<div class="error-msg">${escapeHtml(authError)}</div>` : ``}
+        ${unconfirmedEmail ? `<button type="button" id="resendBtn" class="btn ghost" style="width:100%;margin-top:8px;">${t('btn_resend_confirmation')}</button>` : ``}
+      </form>
+      <div class="auth-toggle">
+        ${authMode === 'signup' ? `${t('toggle_have_account')} <span id="toggleAuth">${t('toggle_login_link')}</span>` : `${t('toggle_no_account')} <span id="toggleAuth">${t('toggle_signup_link')}</span>`}
+      </div>
+      ${renderLangToggleHtml('authLangToggle')}
+    </div>
+  `;
+  document.getElementById('toggleAuth').onclick = () => {
+    authMode = authMode === 'signup' ? 'login' : 'signup';
+    authError = ''; unconfirmedEmail = '';
+    renderAuthScreen();
+  };
+  attachLangToggle('authLangToggle');
+
+  document.getElementById('authForm').onsubmit = async (e) => {
+    e.preventDefault();
+    authError = ''; unconfirmedEmail = '';
+    const email = document.getElementById('f-email').value.trim();
+    const password = document.getElementById('f-password').value;
+
+    if(!email.toLowerCase().endsWith('@gmail.com')){
+      authError = t('err_gmail_only');
+      renderAuthScreen(); return;
+    }
+
+    if(authMode === 'signup'){
+      const localPart = email.slice(0, email.toLowerCase().lastIndexOf('@gmail.com'));
+      if(!/^[^+]+(\+2)?$/.test(localPart)){
+        authError = t('err_gmail_plus_limit');
+        renderAuthScreen(); return;
+      }
+    }
+
+    if(authMode === 'signup'){
+      const nickname = document.getElementById('f-nickname').value.trim();
+      if(nickname.length < 3){
+        authError = t('err_nickname_short');
+        renderAuthScreen(); return;
+      }
+      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({ email, password });
+      if(signUpError){ authError = signUpError.message; renderAuthScreen(); return; }
+
+      if(!signUpData.session){
+        localStorage.setItem('strud_pending_nickname', nickname);
+        mainEl.innerHTML = `<div class="auth-wrap"><img src="${LOGO_URI}" alt="Strud WEB logo" class="auth-logo"><h1>STRUD WEB</h1><div class="info-msg" style="text-align:center;">${t('signup_pending_msg')}</div></div>`;
+        return;
+      }
+      const uid = signUpData.user?.id;
+      await supabase.from('profiles').insert({ id: uid, nickname });
+    } else {
+      const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+      if(signInError){
+        if(signInError.message.toLowerCase().includes('confirm')){
+          authError = t('err_email_unconfirmed');
+          unconfirmedEmail = email;
+        } else { authError = signInError.message; }
+        renderAuthScreen(); return;
+      }
+    }
+    await refreshSession();
+    window.location.hash = '#/ana-sayfa';
+  };
+}
+
+/* ---------------- NAV ---------------- */
+function renderNav(){
+  if(!currentUser){ navlinksEl.innerHTML = ''; authbarEl.innerHTML = ''; return; }
+  const route = currentRoute();
+  const items = [
+    ['ana-sayfa', t('nav_ana_sayfa')],
+    ['oyun', catLabel('oyun')],
+    ['film', catLabel('film')],
+    ['video', catLabel('video')],
+    ['sohbet', catLabel('sohbet')],
+    ['topluluk', catLabel('topluluk')],
+    ['arkadaslar', t('nav_arkadaslar')],
+    ['bildirimler', t('nav_bildirimler') + (notifications.length ? ` (${notifications.length})` : '')],
+    ['destek', t('nav_destek')],
+    ['admin', t('nav_admin')],
+  ];
+  navlinksEl.innerHTML = items.map(([key,label]) => `<div class="navlink ${route===key?'active':''}" data-route="${key}">${label}</div>`).join('');
+  navlinksEl.querySelectorAll('.navlink').forEach(el=>{
+    el.onclick = () => { window.location.hash = '#/'+el.dataset.route; };
+  });
+
+  const roleBadge = currentProfile?.role === 'founder' ? `<span class="pill founder">${t('role_founder')}</span>` : currentProfile?.role === 'admin' ? `<span class="pill admin">${t('role_admin')}</span>` : '';
+  authbarEl.innerHTML = `
+    <span class="pill">${escapeHtml(currentProfile?.nickname || '...')}</span>
+    ${roleBadge}
+    <span class="pill clickable" id="navLangToggle">${currentLang === 'tr' ? 'EN' : 'TR'}</span>
+    <button class="btn ghost small" id="logoutBtn">${t('btn_logout')}</button>
+  `;
+  document.getElementById('logoutBtn').onclick = async () => {
+    await releaseActiveSlot();
+    stopHeartbeat();
+    stopGlobalMessageListener();
+    stopFriendRequestListener();
+    stopFeedRealtime();
+    stopAdminRealtime();
+    notifications = [];
+    await supabase.auth.signOut();
+    await refreshSession();
+    window.location.hash = '';
+  };
+  document.getElementById('navLangToggle').onclick = () => setLang(currentLang === 'tr' ? 'en' : 'tr');
+}
+
+/* ---------------- HOME PAGE ---------------- */
+function renderHome(){
+  mainEl.innerHTML = `
+    <div class="hero-section">
+      <h1>${t('home_hero_title')}</h1>
+      <p>${t('home_hero_desc')}</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-box">
+        <h3>${t('home_feat1_title')}</h3>
+        <p>${t('home_feat1_desc')}</p>
+      </div>
+      <div class="feature-box">
+        <h3>${t('home_feat2_title')}</h3>
+        <p>${t('home_feat2_desc')}</p>
+      </div>
+      <div class="feature-box">
+        <h3>${t('home_feat3_title')}</h3>
+        <p>${t('home_feat3_desc')}</p>
+      </div>
+      <div class="feature-box">
+        <h3>${t('home_feat4_title')}</h3>
+        <p>${t('home_feat4_desc')}</p>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top: 24px;">
+      <button class="btn" style="padding: 12px 28px;" onclick="window.location.hash='#/topluluk'">${t('home_explore_btn')}</button>
+    </div>
+  `;
+}
+
+/* ---------------- FEED ---------------- */
+async function fetchPostsPage(category, offset, limit){
+  const { data: posts, error } = await supabase
+    .from('posts')
+    .select('id, category, title, content, image_url, image_url_2, image_url_3, video_url, tags, hashtags, is_spoiler, rating, author_id, created_at, profiles!posts_author_id_fkey(nickname)')
+    .eq('category', category)
+    .order('created_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+  if(error){ console.error(error); return []; }
+
+  const postIds = posts.map(p=>p.id);
+  let reactions = [];
+  let favorites = [];
+  if(postIds.length){
+    const { data: r } = await supabase.from('post_reactions').select('post_id, user_id, type').in('post_id', postIds);
+    reactions = r || [];
+    const { data: f } = await supabase.from('favorites').select('post_id').in('post_id', postIds).eq('user_id', currentUser.id);
+    favorites = f || [];
+  }
+
+  return posts.map(p => {
+    const postReactions = reactions.filter(r=>r.post_id===p.id);
+    const likeCount = postReactions.filter(r=>r.type==='like').length;
+    const dislikeCount = postReactions.filter(r=>r.type==='dislike').length;
+    const myReaction = postReactions.find(r=>r.user_id===currentUser.id)?.type || null;
+    const isFav = favorites.some(f=>f.post_id===p.id);
+    return { ...p, likeCount, dislikeCount, myReaction, isFav };
+  });
+}
+
+function filterAndRenderPosts(category){
+  const listEl = document.getElementById('postList');
+  if(!listEl) return;
+
+  let filtered = allFetchedPosts.filter(p => {
+    const matchesSearch = currentSearchQuery === '' ||
+      p.title.toLowerCase().includes(currentSearchQuery) ||
+      p.content.toLowerCase().includes(currentSearchQuery) ||
+      (p.profiles?.nickname && p.profiles.nickname.toLowerCase().includes(currentSearchQuery)) ||
+      (p.hashtags && p.hashtags.some(h => h.toLowerCase().includes(currentSearchQuery)));
+
+    let matchesType = true;
+    if(currentMediaTypeFilter === 'image') { matchesType = !!p.image_url; }
+    else if(currentMediaTypeFilter === 'video') { matchesType = !!p.video_url; }
+
+    return matchesSearch && matchesType;
+  });
+
+  filtered = filtered.sort((a, b) => {
+    if (currentSortMode === 'populer') {
+      return b.likeCount - a.likeCount;
+    } else if (currentSortMode === 'trend') {
+      const etkilesimA = a.likeCount + a.dislikeCount;
+      const etkilesimB = b.likeCount + b.dislikeCount;
+      return etkilesimB - etkilesimA;
+    } else {
+      return new Date(b.created_at) - new Date(a.created_at);
+    }
+  });
+
+  const totalCount = allFetchedPosts.length;
+  const imageCount = allFetchedPosts.filter(p => !!p.image_url).length;
+  const videoCount = allFetchedPosts.filter(p => !!p.video_url).length;
+
+  document.getElementById('user-stats-area').innerHTML = `
+    <span>${t('stats_category_posts')}: ${totalCount}</span>
+    <span>${t('stats_image_count')}: ${imageCount}</span>
+    <span>${t('stats_video_count')}: ${videoCount}</span>
+  `;
+
+  if(!filtered.length){
+    listEl.innerHTML = `<div class="empty-state">${t('empty_no_data')}</div>`;
+    return;
+  }
+  listEl.innerHTML = filtered.map(p => renderPostCard(p)).join('');
+  attachPostHandlers(category);
+
+  const loadMoreWrap = document.getElementById('loadMoreWrap');
+  if(loadMoreWrap){
+    if(feedHasMore){
+      loadMoreWrap.innerHTML = `<button class="btn ghost" id="loadMoreBtn" style="width:100%;" ${feedLoadingMore ? 'disabled' : ''}>${feedLoadingMore ? t('loading_more') : t('btn_load_more')}</button>`;
+      const btn = document.getElementById('loadMoreBtn');
+      if(btn) btn.onclick = () => loadMoreFeedPosts(category);
+    } else {
+      loadMoreWrap.innerHTML = '';
+    }
+  }
+}
+
+async function loadMoreFeedPosts(category){
+  if(feedLoadingMore || !feedHasMore) return;
+  feedLoadingMore = true;
+  filterAndRenderPosts(category);
+
+  const nextBatch = await fetchPostsPage(category, allFetchedPosts.length, FEED_PAGE_SIZE);
+  allFetchedPosts = allFetchedPosts.concat(nextBatch);
+  feedHasMore = nextBatch.length === FEED_PAGE_SIZE;
+  feedLoadingMore = false;
+  filterAndRenderPosts(category);
+}
+
+async function renderFeed(category){
+  currentSortMode = 'yeni';
+  currentMediaTypeFilter = 'all';
+  currentSearchQuery = '';
+  feedHasMore = true;
+  feedLoadingMore = false;
+  startFeedRealtime(category);
+
+  let specialFieldsHtml = '';
+  if(category === 'oyun') {
+    specialFieldsHtml = `
+      <div class="field">
+        <label>${t('label_game_store_link')}</label>
+        <input type="url" id="np-special-link" placeholder="${t('game_link_placeholder')}">
+      </div>
+    `;
+  } else if(category === 'film') {
+    specialFieldsHtml = `
+      <div class="field">
+        <label>${t('label_movie_review_link')}</label>
+        <input type="url" id="np-special-link" placeholder="${t('movie_link_placeholder')}">
+      </div>
+    `;
+  }
+
+  mainEl.innerHTML = `
+    <div class="feed-header">
+      <div><h2>${catLabel(category)}</h2></div>
+    </div>
+
+    <div class="stats-banner" id="user-stats-area">
+      <span>${t('stats_loading')}</span>
+    </div>
+
+    <div class="new-post-box">
+      <h3>${t('new_post_heading')}</h3>
+      <form id="newPostForm">
+        <div class="field"><label>${t('label_post_title')}</label><input type="text" id="np-title" maxlength="120" required placeholder="${t('post_title_placeholder')}"></div>
+        <div class="field">
+          <label>${t('label_post_content')}</label>
+          <textarea id="np-content" maxlength="4000" required placeholder="${t('post_content_placeholder')}"></textarea>
+          <div class="counter" id="charCounter">0 / 4000</div>
+        </div>
+
+        ${specialFieldsHtml}
+
+        <div class="form-row-grid" style="margin-top: 20px;">
+          <div class="field">
+            <label>${t('label_image_url')}</label>
+            <input type="url" id="np-image-url" placeholder="${t('image_url_placeholder')}">
+          </div>
+
+          <div class="field">
+            <label>${t('label_video_url')}</label>
+            <input type="url" id="np-video-url" placeholder="${t('video_url_placeholder')}">
+          </div>
+        </div>
+
+        <div class="form-row-grid">
+          <div class="field">
+            <label>${t('label_image_url_2')}</label>
+            <input type="url" id="np-image-url-2" placeholder="${t('image_url_placeholder')}">
+          </div>
+          <div class="field">
+            <label>${t('label_image_url_3')}</label>
+            <input type="url" id="np-image-url-3" placeholder="${t('image_url_placeholder')}">
+          </div>
+        </div>
+
+        <div class="form-row-grid">
+          <div class="field">
+            <label>${t('label_hashtags')}</label>
+            <input type="text" id="np-hashtags" placeholder="${t('hashtags_placeholder')}">
+          </div>
+          ${(category === 'oyun' || category === 'film') ? `
+          <div class="field">
+            <label>${t('label_rating')}</label>
+            <select id="np-rating">
+              <option value="">${t('rating_none')}</option>
+              <option value="1">★☆☆☆☆ (1/5)</option>
+              <option value="2">★★☆☆☆ (2/5)</option>
+              <option value="3">★★★☆☆ (3/5)</option>
+              <option value="4">★★★★☆ (4/5)</option>
+              <option value="5">★★★★★ (5/5)</option>
+            </select>
+          </div>` : ``}
+        </div>
+
+        <div class="field" style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+          <input type="checkbox" id="np-spoiler" style="width:auto;">
+          <label for="np-spoiler" style="margin:0; text-transform:none; font-size:13px;">${t('label_is_spoiler')}</label>
+        </div>
+
+        <button type="submit" class="btn" style="margin-top: 14px;">${t('btn_publish_post')}</button>
+      </form>
+    </div>
+
+    <div class="search-filter-bar">
+      <div class="search-group">
+        <input type="text" id="postSearch" class="search-input" placeholder="${t('search_placeholder')}">
+        <div class="filter-tags">
+          <button class="filter-btn active" data-filter="all">${t('filter_all')}</button>
+          <button class="filter-btn" data-filter="image">${t('filter_images')}</button>
+          <button class="filter-btn" data-filter="video">${t('filter_videos')}</button>
+        </div>
+      </div>
+
+      <div class="sort-tags">
+        <button class="sort-btn active" data-sort="yeni">${t('sort_new')}</button>
+        <button class="sort-btn" data-sort="populer">${t('sort_popular')}</button>
+        <button class="sort-btn" data-sort="trend">${t('sort_trend')}</button>
+      </div>
+    </div>
+
+    <div id="postList">${t('db_scanning')}</div>
+    <div id="loadMoreWrap" style="margin-top:14px;"></div>
+  `;
+
+  const textarea = document.getElementById('np-content');
+  const counter = document.getElementById('charCounter');
+  textarea.oninput = (e) => { counter.textContent = `${e.target.value.length} / 4000`; };
+
+  const searchInput = document.getElementById('postSearch');
+  searchInput.oninput = (e) => {
+    currentSearchQuery = e.target.value.trim().toLowerCase();
+    filterAndRenderPosts(category);
+  };
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentMediaTypeFilter = btn.dataset.filter;
+      filterAndRenderPosts(category);
+    };
+  });
+
+  document.querySelectorAll('.sort-btn').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentSortMode = btn.dataset.sort;
+      filterAndRenderPosts(category);
+    };
+  });
+
+  document.getElementById('newPostForm').onsubmit = async (e) => {
+    e.preventDefault();
+    const title = document.getElementById('np-title').value.trim();
+    const content = document.getElementById('np-content').value.trim();
+    const specialLinkInput = document.getElementById('np-special-link');
+    const special_link = specialLinkInput ? specialLinkInput.value.trim() : null;
+
+    const image_url = document.getElementById('np-image-url').value.trim() || null;
+    const video_url = document.getElementById('np-video-url').value.trim() || null;
+    const image_url_2 = document.getElementById('np-image-url-2').value.trim() || null;
+    const image_url_3 = document.getElementById('np-image-url-3').value.trim() || null;
+    const is_spoiler = document.getElementById('np-spoiler').checked;
+    const ratingInput = document.getElementById('np-rating');
+    const rating = ratingInput && ratingInput.value ? parseInt(ratingInput.value, 10) : null;
+    const hashtagsRaw = document.getElementById('np-hashtags').value.trim();
+    const hashtags = hashtagsRaw ? hashtagsRaw.split(',').map(h => h.trim().replace(/^#/, '')).filter(Boolean) : null;
+
+    if(!title || !content) return;
+
+    const { data: inserted, error } = await supabase.from('posts').insert({
+      category, title, content, image_url, image_url_2, image_url_3, video_url,
+      author_id: currentUser.id, tags: special_link ? [special_link] : null,
+      hashtags, is_spoiler, rating
+    }).select('id, category, title, content, image_url, image_url_2, image_url_3, video_url, tags, hashtags, is_spoiler, rating, author_id, created_at').single();
+    if(error){ alert(t('err_action_failed') + error.message); return; }
+
+    allFetchedPosts.unshift({
+      ...inserted,
+      profiles: { nickname: currentProfile.nickname },
+      likeCount: 0, dislikeCount: 0, myReaction: null, isFav: false
+    });
+
+    e.target.reset();
+    counter.textContent = "0 / 4000";
+
+    filterAndRenderPosts(category);
+  };
+
+  loadFeedData(category);
+}
+
+async function loadFeedData(category) {
+  allFetchedPosts = await fetchPostsPage(category, 0, FEED_PAGE_SIZE);
+  feedHasMore = allFetchedPosts.length === FEED_PAGE_SIZE;
+  filterAndRenderPosts(category);
+}
+
+/* ---------------- FEED GERÇEK ZAMANLI (REALTIME) ---------------- */
+async function refreshSinglePostReactions(postId){
+  const { data: r } = await supabase.from('post_reactions').select('user_id, type').eq('post_id', postId);
+  const likeCount = (r||[]).filter(x=>x.type==='like').length;
+  const dislikeCount = (r||[]).filter(x=>x.type==='dislike').length;
+  const myReaction = (r||[]).find(x=>x.user_id===currentUser.id)?.type || null;
+  const idx = allFetchedPosts.findIndex(p=>p.id===postId);
+  if(idx!==-1){ allFetchedPosts[idx] = { ...allFetchedPosts[idx], likeCount, dislikeCount, myReaction }; }
+}
+
+function startFeedRealtime(category){
+  stopFeedRealtime();
+  feedChannel = supabase.channel('feed-' + category)
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'posts', filter: `category=eq.${category}` }, async (payload) => {
+      const newPost = payload.new;
+      if(allFetchedPosts.some(p => p.id === newPost.id)) return; // kendi eklediğimiz gönderi zaten yerelde var
+      const { data: authorProfile } = await supabase.from('profiles').select('nickname').eq('id', newPost.author_id).maybeSingle();
+      allFetchedPosts.unshift({
+        ...newPost,
+        profiles: { nickname: authorProfile?.nickname || '?' },
+        likeCount: 0, dislikeCount: 0, myReaction: null, isFav: false,
+      });
+      filterAndRenderPosts(category);
+    })
+    .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'posts', filter: `category=eq.${category}` }, (payload) => {
+      const updated = payload.new;
+      const idx = allFetchedPosts.findIndex(p => p.id === updated.id);
+      if(idx === -1) return;
+      allFetchedPosts[idx] = { ...allFetchedPosts[idx], ...updated };
+      filterAndRenderPosts(category);
+    })
+    .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'posts', filter: `category=eq.${category}` }, (payload) => {
+      allFetchedPosts = allFetchedPosts.filter(p => p.id !== payload.old.id);
+      filterAndRenderPosts(category);
+    })
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'post_reactions' }, async (payload) => {
+      const postId = (payload.new && payload.new.post_id) || (payload.old && payload.old.post_id);
+      if(!postId || !allFetchedPosts.some(p => p.id === postId)) return;
+      await refreshSinglePostReactions(postId);
+      filterAndRenderPosts(category);
+    })
+    .subscribe();
+}
+
+function stopFeedRealtime(){
+  if(feedChannel){ supabase.removeChannel(feedChannel); feedChannel = null; }
+}
+
+function renderPostCard(p){
+  const canDelete = isAdminOrFounder() || p.author_id === currentUser.id;
+  const canEdit = p.author_id === currentUser.id;
+
+  let specialBadgeHtml = '';
+  if(p.tags && p.tags[0]) {
+    const linkUrl = p.tags[0];
+    if(p.category === 'oyun') {
+      specialBadgeHtml = `<div class="special-badge-area"><a href="${escapeHtml(linkUrl)}" target="_blank" class="special-link-btn">${t('store_link_btn')}</a></div>`;
+    } else if(p.category === 'film') {
+      specialBadgeHtml = `<div class="special-badge-area"><a href="${escapeHtml(linkUrl)}" target="_blank" class="special-link-btn">${t('review_link_btn')}</a></div>`;
+    }
+  }
+
+  let ratingHtml = '';
+  if(p.rating){
+    const stars = '★'.repeat(p.rating) + '☆'.repeat(5 - p.rating);
+    ratingHtml = `<div class="post-rating">${stars} (${p.rating}/5)</div>`;
+  }
+
+  let hashtagsHtml = '';
+  if(p.hashtags && p.hashtags.length){
+    hashtagsHtml = `<div class="hashtag-row">${p.hashtags.map(h => `<span class="hashtag-pill" data-hashtag="${escapeHtml(h)}">#${escapeHtml(h)}</span>`).join('')}</div>`;
+  }
+
+  const galleryExtra = [p.image_url_2, p.image_url_3].filter(Boolean);
+  let mediaHtml = '';
+  if(p.image_url) {
+    if(galleryExtra.length){
+      mediaHtml += `<div class="post-gallery">
+        <div class="post-media-wrap"><img src="${escapeHtml(p.image_url)}" class="post-img" loading="lazy" onerror="this.style.display='none'"></div>
+        ${galleryExtra.map(url => `<div class="post-media-wrap"><img src="${escapeHtml(url)}" class="post-img" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`).join('')}
+      </div>`;
+    } else {
+      mediaHtml += `<div class="post-media-wrap"><img src="${escapeHtml(p.image_url)}" class="post-img" loading="lazy" onerror="this.style.display='none'"></div>`;
+    }
+  }
+
+  if(p.video_url) {
+    const ytId = extractYouTubeId(p.video_url);
+    if(ytId) {
+      mediaHtml += `<div class="post-media-wrap"><div class="post-video-container"><iframe src="https://www.youtube.com/embed/${ytId}" allowfullscreen></iframe></div></div>`;
+    } else if(p.video_url.startsWith('http')) {
+      mediaHtml += `<div class="post-media-wrap"><video src="${escapeHtml(p.video_url)}" class="post-video-element" controls></video></div>`;
+    }
+  }
+
+  const bodyHtml = `
+    ${ratingHtml}
+    <div class="post-title">${escapeHtml(p.title)}</div>
+    <div class="post-content">${escapeHtml(p.content)}</div>
+    ${specialBadgeHtml}
+    ${hashtagsHtml}
+    ${mediaHtml}
+  `;
+
+  const contentBlock = p.is_spoiler
+    ? `<div class="spoiler-wrap">
+         <div class="spoiler-blur">${bodyHtml}</div>
+         <div class="spoiler-overlay"><button type="button" class="spoiler-reveal-btn" data-action="reveal-spoiler">${t('btn_reveal_spoiler')}</button></div>
+       </div>`
+    : bodyHtml;
+
+  return `
+    <div class="post-card" data-post-id="${p.id}">
+      <div class="post-meta"><span class="author">${escapeHtml(p.profiles?.nickname || (currentLang === 'en' ? 'Anonymous' : 'Anonim'))}</span><span>·</span><span>${timeAgo(p.created_at)}</span>${p.is_spoiler ? `<span class="status-tag red">${t('spoiler_tag')}</span>` : ''}</div>
+      ${contentBlock}
+      <div class="post-actions">
+        <button class="react-btn ${p.myReaction==='like'?'active-like':''}" data-action="like">▲ ${p.likeCount}</button>
+        <button class="react-btn ${p.myReaction==='dislike'?'active-dislike':''}" data-action="dislike">▼ ${p.dislikeCount}</button>
+        <button class="react-btn ${p.isFav?'active-fav':''}" data-action="fav">${p.isFav?'★':'☆'} ${t('favorite_btn')}</button>
+        ${isAdminOrFounder() ? `<button class="react-btn" data-action="report">${t('report_btn')}</button>` : ``}
+        ${canEdit ? `<button class="react-btn" data-action="edit">${t('edit_btn')}</button>` : ``}
+        ${canDelete ? `<button class="react-btn" data-action="delete" style="margin-left:auto;color:#e26f6f;">${t('delete_btn')}</button>` : ``}
+      </div>
+    </div>
+  `;
+}
+
+function startEditPost(postId){
+  const idx = allFetchedPosts.findIndex(p => p.id === postId);
+  if(idx === -1) return;
+  const p = allFetchedPosts[idx];
+  const card = document.querySelector(`.post-card[data-post-id="${postId}"]`);
+  if(!card) return;
+
+  let specialFieldHtml = '';
+  if(p.category === 'oyun'){
+    specialFieldHtml = `<div class="field"><label>${t('label_game_store_link')}</label><input type="url" class="edit-special-link" value="${escapeHtml((p.tags && p.tags[0]) || '')}"></div>`;
+  } else if(p.category === 'film'){
+    specialFieldHtml = `<div class="field"><label>${t('label_movie_review_link')}</label><input type="url" class="edit-special-link" value="${escapeHtml((p.tags && p.tags[0]) || '')}"></div>`;
+  }
+
+  let ratingFieldHtml = '';
+  if(p.category === 'oyun' || p.category === 'film'){
+    const cur = p.rating || '';
+    ratingFieldHtml = `
+      <div class="field">
+        <label>${t('label_rating')}</label>
+        <select class="edit-rating">
+          <option value="" ${cur === '' ? 'selected' : ''}>${t('rating_none')}</option>
+          <option value="1" ${cur === 1 ? 'selected' : ''}>★☆☆☆☆ (1/5)</option>
+          <option value="2" ${cur === 2 ? 'selected' : ''}>★★☆☆☆ (2/5)</option>
+          <option value="3" ${cur === 3 ? 'selected' : ''}>★★★☆☆ (3/5)</option>
+          <option value="4" ${cur === 4 ? 'selected' : ''}>★★★★☆ (4/5)</option>
+          <option value="5" ${cur === 5 ? 'selected' : ''}>★★★★★ (5/5)</option>
+        </select>
+      </div>`;
+  }
+
+  card.innerHTML = `
+    <form class="edit-post-form">
+      <div class="field"><label>${t('label_post_title')}</label><input type="text" class="edit-title" value="${escapeHtml(p.title)}" maxlength="120" required></div>
+      <div class="field"><label>${t('label_post_content')}</label><textarea class="edit-content" maxlength="4000" required>${escapeHtml(p.content)}</textarea></div>
+      ${specialFieldHtml}
+      <div class="form-row-grid" style="margin-top:10px;">
+        <div class="field"><label>${t('label_image_url')}</label><input type="url" class="edit-image-url" value="${escapeHtml(p.image_url || '')}"></div>
+        <div class="field"><label>${t('label_video_url')}</label><input type="url" class="edit-video-url" value="${escapeHtml(p.video_url || '')}"></div>
+      </div>
+      <div class="form-row-grid">
+        <div class="field"><label>${t('label_image_url_2')}</label><input type="url" class="edit-image-url-2" value="${escapeHtml(p.image_url_2 || '')}"></div>
+        <div class="field"><label>${t('label_image_url_3')}</label><input type="url" class="edit-image-url-3" value="${escapeHtml(p.image_url_3 || '')}"></div>
+      </div>
+      <div class="form-row-grid">
+        <div class="field"><label>${t('label_hashtags')}</label><input type="text" class="edit-hashtags" value="${escapeHtml((p.hashtags || []).join(', '))}"></div>
+        ${ratingFieldHtml}
+      </div>
+      <div class="field" style="display:flex; align-items:center; gap:8px;">
+        <input type="checkbox" class="edit-spoiler" style="width:auto;" ${p.is_spoiler ? 'checked' : ''}>
+        <label style="margin:0; text-transform:none; font-size:13px;">${t('label_is_spoiler')}</label>
+      </div>
+      <div style="display:flex; gap:8px; margin-top:12px;">
+        <button type="submit" class="btn small">${t('save_btn')}</button>
+        <button type="button" class="btn ghost small" data-action="cancel-edit-post">${t('cancel_btn')}</button>
+      </div>
+    </form>
+  `;
+
+  card.querySelector('.edit-post-form').onsubmit = async (e) => {
+    e.preventDefault();
+    const title = card.querySelector('.edit-title').value.trim();
+    const content = card.querySelector('.edit-content').value.trim();
+    const image_url = card.querySelector('.edit-image-url').value.trim() || null;
+    const video_url = card.querySelector('.edit-video-url').value.trim() || null;
+    const image_url_2 = card.querySelector('.edit-image-url-2').value.trim() || null;
+    const image_url_3 = card.querySelector('.edit-image-url-3').value.trim() || null;
+    const specialInput = card.querySelector('.edit-special-link');
+    const tags = specialInput && specialInput.value.trim() ? [specialInput.value.trim()] : null;
+    const hashtagsRaw = card.querySelector('.edit-hashtags').value.trim();
+    const hashtags = hashtagsRaw ? hashtagsRaw.split(',').map(h => h.trim().replace(/^#/, '')).filter(Boolean) : null;
+    const ratingSelect = card.querySelector('.edit-rating');
+    const rating = ratingSelect && ratingSelect.value ? parseInt(ratingSelect.value, 10) : null;
+    const is_spoiler = card.querySelector('.edit-spoiler').checked;
+    if(!title || !content) return;
+
+    const { error } = await supabase.from('posts').update({
+      title, content, image_url, video_url, image_url_2, image_url_3, tags, hashtags, rating, is_spoiler
+    }).eq('id', postId);
+    if(error){ alert(t('err_action_failed') + error.message); return; }
+
+    allFetchedPosts[idx] = { ...p, title, content, image_url, video_url, image_url_2, image_url_3, tags, hashtags, rating, is_spoiler };
+    filterAndRenderPosts(p.category);
+  };
+  card.querySelector('[data-action="cancel-edit-post"]').onclick = () => filterAndRenderPosts(p.category);
+}
+
+function attachPostHandlers(category){
+  document.querySelectorAll('.post-card').forEach(card => {
+    const postId = card.dataset.postId;
+    card.querySelectorAll('[data-action]').forEach(btn => {
+      btn.onclick = async () => {
+        const action = btn.dataset.action;
+        if(action === 'like' || action === 'dislike'){
+          await toggleReaction(postId, action);
+          filterAndRenderPosts(category);
+        } else if(action === 'fav'){
+          await toggleFavorite(postId);
+          filterAndRenderPosts(category);
+        } else if(action === 'edit'){
+          startEditPost(postId);
+        } else if(action === 'delete'){
+          if(confirm(t('confirm_delete_post'))){
+            await supabase.from('posts').delete().eq('id', postId);
+            allFetchedPosts = allFetchedPosts.filter(p => p.id !== postId);
+            filterAndRenderPosts(category);
+          }
+        } else if(action === 'report'){
+          const msg = prompt(t('report_prompt'));
+          if(msg){
+            await supabase.from('founder_messages').insert({ sender_id: currentUser.id, content: `[RAPOR - ID:${postId}] ${msg}` });
+            alert(t('report_success'));
+          }
+        } else if(action === 'reveal-spoiler'){
+          const wrap = card.querySelector('.spoiler-wrap');
+          if(wrap){
+            wrap.querySelector('.spoiler-blur')?.classList.remove('spoiler-blur');
+            wrap.querySelector('.spoiler-overlay')?.remove();
+          }
+        }
+      };
+    });
+    card.querySelectorAll('[data-hashtag]').forEach(pill => {
+      pill.onclick = () => {
+        currentSearchQuery = pill.dataset.hashtag.toLowerCase();
+        const searchInput = document.getElementById('postSearch');
+        if(searchInput) searchInput.value = pill.dataset.hashtag;
+        filterAndRenderPosts(category);
+      };
+    });
+  });
+}
+
+// Yerel gönderi listesindeki beğeni/beğenmeme sayısını ağa tekrar sormadan günceller (bandwidth tasarrufu)
+function updateLocalReaction(postId, newType){
+  const idx = allFetchedPosts.findIndex(p => p.id === postId);
+  if(idx === -1) return;
+  const p = allFetchedPosts[idx];
+  let likeCount = p.likeCount, dislikeCount = p.dislikeCount;
+  if(p.myReaction === 'like') likeCount--;
+  if(p.myReaction === 'dislike') dislikeCount--;
+  if(newType === 'like') likeCount++;
+  if(newType === 'dislike') dislikeCount++;
+  allFetchedPosts[idx] = { ...p, likeCount, dislikeCount, myReaction: newType };
+}
+
+function updateLocalFavorite(postId, isFav){
+  const idx = allFetchedPosts.findIndex(p => p.id === postId);
+  if(idx === -1) return;
+  allFetchedPosts[idx] = { ...allFetchedPosts[idx], isFav };
+}
+
+async function toggleReaction(postId, type){
+  const idx = allFetchedPosts.findIndex(p => p.id === postId);
+  const current = idx !== -1 ? allFetchedPosts[idx].myReaction : null;
+
+  if(current === type){
+    await supabase.from('post_reactions').delete().eq('post_id', postId).eq('user_id', currentUser.id);
+    updateLocalReaction(postId, null);
+  } else {
+    await supabase.from('post_reactions').upsert(
+      { post_id: postId, user_id: currentUser.id, type },
+      { onConflict: 'post_id,user_id' }
+    );
+    updateLocalReaction(postId, type);
+  }
+}
+
+async function toggleFavorite(postId){
+  const idx = allFetchedPosts.findIndex(p => p.id === postId);
+  const isFav = idx !== -1 ? allFetchedPosts[idx].isFav : false;
+
+  if(isFav){
+    await supabase.from('favorites').delete().eq('post_id', postId).eq('user_id', currentUser.id);
+    updateLocalFavorite(postId, false);
+  } else {
+    await supabase.from('favorites').upsert(
+      { post_id: postId, user_id: currentUser.id },
+      { onConflict: 'user_id,post_id', ignoreDuplicates: true }
+    );
+    updateLocalFavorite(postId, true);
+  }
+}
+
+/* ---------------- BİLDİRİMLER SAYFASI ---------------- */
+function renderNotifications(){
+  mainEl.innerHTML = `
+    <div class="feed-header">
+      <div><h2>${t('nav_bildirimler')}</h2></div>
+      ${notifications.length ? `<button class="btn ghost small" id="markAllReadBtn">${t('btn_mark_all_read')}</button>` : ``}
+    </div>
+    <div id="notifList"></div>
+  `;
+  const listEl = document.getElementById('notifList');
+
+  const markAllBtn = document.getElementById('markAllReadBtn');
+  if(markAllBtn){
+    markAllBtn.onclick = async () => {
+      const ids = notifications.map(n => n.id);
+      notifications = [];
+      updateTabTitleBadge();
+      renderNav();
+      renderNotifications();
+      await supabase.from('notifications').delete().in('id', ids);
+    };
+  }
+
+  if(!notifications.length){
+    listEl.innerHTML = `<div class="empty-state">${t('notif_empty')}</div>`;
+    return;
+  }
+
+  listEl.innerHTML = notifications.map(n => `
+    <div class="app-row" data-notif-id="${n.id}" style="cursor:pointer;">
+      <div class="txt">
+        <div class="who">${escapeHtml(n.nickname)} <span class="status-tag beklemede">${t('notif_new_message')}</span></div>
+        <div class="msg">${escapeHtml(n.content)}</div>
+      </div>
+    </div>
+  `).join('');
+
+  listEl.querySelectorAll('[data-notif-id]').forEach(row => {
+    row.onclick = async () => {
+      const notif = notifications.find(n => n.id === row.dataset.notifId);
+      if(notif){
+        notifications = notifications.filter(n => n.id !== notif.id);
+        updateTabTitleBadge();
+        renderNav();
+        await supabase.from('notifications').delete().eq('id', notif.id);
+        window.location.hash = '#/dm/' + notif.senderId;
+      }
+    };
+  });
+}
+
+/* ---------------- ARKADAŞLAR ---------------- */
+async function renderFriends(){
+  mainEl.innerHTML = `<div class="feed-header"><div><h2>${t('friends_heading')}</h2></div></div><div class="empty-state">${t('admin_sync')}</div>`;
+
+  const [{ data: incoming }, { data: outgoing }, { data: asSender }, { data: asReceiver }] = await Promise.all([
+    supabase.from('friend_requests').select('id, sender_id, profiles!friend_requests_sender_id_fkey(nickname)').eq('receiver_id', currentUser.id).eq('status', 'bekliyor'),
+    supabase.from('friend_requests').select('id, receiver_id, profiles!friend_requests_receiver_id_fkey(nickname)').eq('sender_id', currentUser.id).eq('status', 'bekliyor'),
+    supabase.from('friend_requests').select('receiver_id, profiles!friend_requests_receiver_id_fkey(nickname)').eq('sender_id', currentUser.id).eq('status', 'kabul'),
+    supabase.from('friend_requests').select('sender_id, profiles!friend_requests_sender_id_fkey(nickname)').eq('receiver_id', currentUser.id).eq('status', 'kabul'),
+  ]);
+
+  const rawFriends = [
+    ...(asSender || []).map(f => ({ friendId: f.receiver_id, nickname: f.profiles?.nickname })),
+    ...(asReceiver || []).map(f => ({ friendId: f.sender_id, nickname: f.profiles?.nickname })),
+  ];
+  // Aynı kişi iki yönlü (karşılıklı) kabul kaydı yüzünden birden fazla kez
+  // görünebiliyor — friendId'ye göre tekilleştiriyoruz.
+  const friendsMap = new Map();
+  rawFriends.forEach(f => { if(!friendsMap.has(f.friendId)) friendsMap.set(f.friendId, f); });
+  const friends = Array.from(friendsMap.values());
+
+  mainEl.innerHTML = `
+    <div class="feed-header"><div><h2>${t('friends_heading')}</h2></div></div>
+
+    <div class="new-post-box">
+      <h3>${t('friends_search_heading')}</h3>
+      <form id="friendSearchForm" style="display:flex; gap:8px;">
+        <input type="text" id="friend-search-input" class="search-input" placeholder="${t('friend_search_placeholder')}" required>
+        <button type="submit" class="btn">${t('btn_search')}</button>
+      </form>
+      <div id="friendSearchResults" style="margin-top:14px;"></div>
+    </div>
+
+    <div class="admin-section">
+      <h3>${t('incoming_requests_heading')}</h3>
+      ${(incoming || []).length ? incoming.map(r => `
+        <div class="app-row" data-request-id="${r.id}">
+          <div class="txt"><div class="who">${escapeHtml(r.profiles?.nickname || '?')}</div></div>
+          <div style="display:flex;gap:6px;">
+            <button class="btn small" data-req-action="kabul">${t('btn_accept')}</button>
+            <button class="btn ghost small" data-req-action="red">${t('btn_reject')}</button>
+          </div>
+        </div>
+      `).join('') : `<div style="color:var(--text-dim);font-size:13px;">${t('no_pending_requests')}</div>`}
+    </div>
+
+    <div class="admin-section">
+      <h3>${t('outgoing_requests_heading')}</h3>
+      ${(outgoing || []).length ? outgoing.map(r => `
+        <div class="app-row"><div class="txt"><div class="who">${escapeHtml(r.profiles?.nickname || '?')} <span class="status-tag beklemede">${t('status_pending')}</span></div></div></div>
+      `).join('') : `<div style="color:var(--text-dim);font-size:13px;">${t('no_sent_requests')}</div>`}
+    </div>
+
+    <div class="admin-section">
+      <h3>${t('my_friends_heading')}</h3>
+      ${friends.length ? friends.map(f => `
+        <div class="app-row">
+          <div class="txt"><div class="who">${escapeHtml(f.nickname || '?')}</div></div>
+          <button class="btn small" data-chat-with="${f.friendId}">${t('btn_chat')}</button>
+        </div>
+      `).join('') : `<div style="color:var(--text-dim);font-size:13px;">${t('no_friends_yet')}</div>`}
+    </div>
+  `;
+
+  document.getElementById('friendSearchForm').onsubmit = async (e) => {
+    e.preventDefault();
+    const q = document.getElementById('friend-search-input').value.trim();
+    if(!q) return;
+    const { data: results } = await supabase.from('profiles').select('id, nickname').ilike('nickname', `%${q}%`).neq('id', currentUser.id).limit(10);
+    const resultsEl = document.getElementById('friendSearchResults');
+    if(!results || !results.length){
+      resultsEl.innerHTML = `<div style="color:var(--text-dim);font-size:13px;">${t('no_results_found')}</div>`;
+      return;
+    }
+    resultsEl.innerHTML = results.map(u => `
+      <div class="app-row">
+        <div class="txt"><div class="who">${escapeHtml(u.nickname)}</div></div>
+        <button class="btn small" data-send-request="${u.id}">${t('btn_send_request')}</button>
+      </div>
+    `).join('');
+    resultsEl.querySelectorAll('[data-send-request]').forEach(btn => {
+      btn.onclick = async () => {
+        const receiverId = btn.dataset.sendRequest;
+        const { error } = await supabase.from('friend_requests').insert({ sender_id: currentUser.id, receiver_id: receiverId });
+        if(error){ alert(t('err_request_failed') + error.message); return; }
+        btn.textContent = t('btn_sent');
+        btn.disabled = true;
+      };
+    });
+  };
+
+  document.querySelectorAll('[data-req-action]').forEach(btn => {
+    btn.onclick = async () => {
+      const row = btn.closest('.app-row');
+      const reqId = row.dataset.requestId;
+      const status = btn.dataset.reqAction;
+      await supabase.from('friend_requests').update({ status }).eq('id', reqId);
+      renderFriends();
+    };
+  });
+
+  document.querySelectorAll('[data-chat-with]').forEach(btn => {
+    btn.onclick = () => { window.location.hash = '#/dm/' + btn.dataset.chatWith; };
+  });
+}
+
+/* ---------------- KARŞILIKLI SOHBET ---------------- */
+function canDeleteMessage(m){
+  return m.sender_id === currentUser.id || isFounder();
+}
+
+async function renderChat(friendId){
+  const { data: friendProfile } = await supabase.from('profiles').select('nickname').eq('id', friendId).maybeSingle();
+  if(!friendProfile){
+    mainEl.innerHTML = `<div class="empty-state">${t('user_not_found')}</div>`;
+    return;
+  }
+
+  activeChatFriendId = friendId;
+
+  const hadNotifs = notifications.some(n => n.senderId === friendId);
+  if(hadNotifs){
+    notifications = notifications.filter(n => n.senderId !== friendId);
+    renderNav();
+    updateTabTitleBadge();
+  }
+  // DB'de o kişiden kalan bildirimleri her ihtimale karşı temizle (local dizide olmasa bile)
+  supabase.from('notifications').delete().eq('user_id', currentUser.id).eq('sender_id', friendId);
+
+  mainEl.innerHTML = `
+    <div class="feed-header"><div><h2>💬 ${escapeHtml(friendProfile.nickname)}</h2></div></div>
+    <div class="new-post-box chat-window">
+      <div id="chatMessages" class="chat-messages"></div>
+      <form id="chatForm" class="chat-form">
+        <input type="text" id="chatInput" class="search-input" maxlength="1000" placeholder="${t('chat_input_placeholder')}" required>
+        <button type="submit" class="btn">${t('btn_send')}</button>
+      </form>
+    </div>
+  `;
+
+  const messagesEl = document.getElementById('chatMessages');
+
+  function renderMessages(msgs){
+    if(!msgs.length){
+      messagesEl.innerHTML = `<div class="empty-state">${t('no_messages_yet')}</div>`;
+      return;
+    }
+    messagesEl.innerHTML = msgs.map(m => {
+      const mine = m.sender_id === currentUser.id;
+      const canDel = canDeleteMessage(m);
+      return `
+        <div class="chat-bubble ${mine ? 'mine' : 'theirs'}" data-message-id="${m.id}">
+          <div class="txt">${escapeHtml(m.content)}</div>
+          <div class="time">${timeAgo(m.created_at)}${m.edited_at ? ' · ' + t('edited_tag') : ''}
+            ${mine ? ` <span class="edit-msg-btn" data-action="edit-msg">${t('edit_btn')}</span>` : ''}
+            ${canDel ? ` <span class="edit-msg-btn" data-action="delete-msg">${t('delete_btn')}</span>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+
+    messagesEl.querySelectorAll('[data-action="edit-msg"]').forEach(btn => {
+      btn.onclick = () => startEditMessage(btn.closest('.chat-bubble'));
+    });
+    messagesEl.querySelectorAll('[data-action="delete-msg"]').forEach(btn => {
+      btn.onclick = async () => {
+        if(!confirm(t('confirm_delete_message'))) return;
+        const messageId = btn.closest('.chat-bubble').dataset.messageId;
+        await supabase.from('direct_messages').delete().eq('id', messageId);
+        await loadMessages();
+      };
+    });
+  }
+
+  function startEditMessage(bubbleEl){
+    const messageId = bubbleEl.dataset.messageId;
+    const currentText = bubbleEl.querySelector('.txt').textContent;
+    bubbleEl.innerHTML = `
+      <form class="edit-msg-form">
+        <input type="text" class="search-input" value="${escapeHtml(currentText)}" maxlength="1000" required>
+        <div style="display:flex; gap:6px; margin-top:8px;">
+          <button type="submit" class="btn small">${t('save_btn')}</button>
+          <button type="button" class="btn ghost small" data-action="cancel-edit">${t('cancel_btn')}</button>
+        </div>
+      </form>
+    `;
+    const form = bubbleEl.querySelector('.edit-msg-form');
+    const input = form.querySelector('input');
+    input.focus();
+    input.setSelectionRange(input.value.length, input.value.length);
+
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      const newContent = input.value.trim();
+      if(!newContent) return;
+      const { error } = await supabase.from('direct_messages')
+        .update({ content: newContent, edited_at: new Date().toISOString() })
+        .eq('id', messageId);
+      if(error){ alert(t('err_message_edit_failed') + error.message); }
+      await loadMessages();
+    };
+    form.querySelector('[data-action="cancel-edit"]').onclick = () => loadMessages();
+  }
+
+  async function loadMessages(){
+    const { data } = await supabase.from('direct_messages')
+      .select('id, sender_id, receiver_id, content, created_at, edited_at')
+      .or(`and(sender_id.eq.${currentUser.id},receiver_id.eq.${friendId}),and(sender_id.eq.${friendId},receiver_id.eq.${currentUser.id})`)
+      .order('created_at', { ascending: true });
+    renderMessages(data || []);
+  }
+
+  await loadMessages();
+
+  document.getElementById('chatForm').onsubmit = async (e) => {
+    e.preventDefault();
+    const input = document.getElementById('chatInput');
+    const content = input.value.trim();
+    if(!content) return;
+    input.value = '';
+    const { error } = await supabase.from('direct_messages').insert({ sender_id: currentUser.id, receiver_id: friendId, content });
+    if(error){ alert(t('err_message_send_failed') + error.message); return; }
+    await loadMessages();
+  };
+
+  if(dmChannel){ supabase.removeChannel(dmChannel); dmChannel = null; }
+  const channelKey = [currentUser.id, friendId].sort().join('-');
+  dmChannel = supabase.channel('dm-' + channelKey)
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'direct_messages' }, (payload) => {
+      const m = payload.new;
+      const isRelevant = (m.sender_id === currentUser.id && m.receiver_id === friendId) || (m.sender_id === friendId && m.receiver_id === currentUser.id);
+      if(isRelevant) loadMessages();
+    })
+    .subscribe();
+}
+
+/* ---------------- DESTEK PANELİ ---------------- */
+function renderDestek(){
+  mainEl.innerHTML = `
+    <div class="feed-header">
+      <div>
+        <h2>${t('destek_heading')}</h2>
+        <p style="color:var(--text-dim); font-size:14px; margin-top:6px;">${t('destek_desc')}</p>
+      </div>
+    </div>
+    <div class="new-post-box">
+      <form id="destekForm">
+        <div class="field">
+          <label>${t('label_subject')}</label>
+          <input type="text" id="destek-konu" maxlength="100" required placeholder="${t('subject_placeholder')}">
+        </div>
+        <div class="field">
+          <label>${t('label_detail')}</label>
+          <textarea id="destek-detay" maxlength="1000" required placeholder="${t('detail_placeholder')}"></textarea>
+        </div>
+        <button type="submit" class="btn" style="background:var(--blood); border-color:var(--blood);">${t('btn_send_support')}</button>
+      </form>
+    </div>
+  `;
+
+  document.getElementById('destekForm').onsubmit = async (e) => {
+    e.preventDefault();
+    const konu = document.getElementById('destek-konu').value.trim();
+    const detay = document.getElementById('destek-detay').value.trim();
+    if(!konu || !detay) return;
+
+    const content = `[DESTEK] Konu: ${konu} | Detay: ${detay}`;
+    const { error } = await supabase.from('founder_messages').insert({
+      sender_id: currentUser.id,
+      content: content
+    });
+
+    if(error){
+      alert(t('err_support_failed') + error.message);
+      return;
+    }
+
+    alert(t('support_success'));
+    window.location.hash = '#/ana-sayfa';
+  };
+}
+
+/* ---------------- ADMIN PANEL ---------------- */
+async function renderAdmin(){
+  startAdminRealtime();
+  mainEl.innerHTML = `<div class="feed-header"><div><h2>${t('admin_heading')}</h2><p>${t('admin_sync')}</p></div></div>`;
+  let html = `<div class="feed-header"><div><h2>${t('admin_heading')}</h2></div></div>`;
+
+  function statusLabel(s){ return t('status_' + s); }
+
+  if(isFounder()){
+    const { data: apps } = await supabase.from('admin_applications').select('*, profiles!admin_applications_user_id_fkey(nickname)').order('created_at', {ascending:false});
+    const { data: messages } = await supabase.from('founder_messages').select('*, profiles!founder_messages_sender_id_fkey(nickname)').order('created_at', {ascending:false});
+
+    html += `
+      <div class="admin-section">
+        <h3>${t('mod_applications_heading')}</h3>
+        ${(apps||[]).length ? apps.map(a => `
+          <div class="app-row" data-app-id="${a.id}">
+            <div class="txt">
+              <div class="who">${escapeHtml(a.profiles?.nickname || '?')} <span class="status-tag ${a.status}">${statusLabel(a.status)}</span></div>
+              <div class="msg">${escapeHtml(a.message)}</div>
+            </div>
+            ${a.status === 'beklemede' ? `
+              <div style="display:flex;gap:6px;">
+                <button class="btn small" data-app-action="kabul">${t('btn_accept')}</button>
+                <button class="btn ghost small" data-app-action="red">${t('btn_reject')}</button>
+              </div>` : ``}
+          </div>
+        `).join('') : `<div style="color:var(--text-dim);font-size:13px;">${t('no_applications')}</div>`}
+      </div>
+
+      <div class="admin-section">
+        <h3>${t('system_logs_heading')}</h3>
+        ${(messages||[]).length ? messages.map(m => `
+          <div class="msg-row">
+            <div class="from">${escapeHtml(m.profiles?.nickname || '?')} · ${timeAgo(m.created_at)}</div>
+            <div class="body">${escapeHtml(m.content)}</div>
+          </div>
+        `).join('') : `<div style="color:var(--text-dim);font-size:13px;">${t('inbox_clean')}</div>`}
+      </div>
+    `;
+  } else {
+    const { data: myApp } = await supabase.from('admin_applications').select('*').eq('user_id', currentUser.id).order('created_at',{ascending:false}).limit(1).maybeSingle();
+    html += `
+      <div class="admin-section">
+        <h3>${t('application_form_heading')}</h3>
+        ${isAdminOrFounder() ? `<div style="color:var(--sick-bright);font-size:13px;">${t('role_sufficient')}</div>` :
+          myApp ? `<div>${t('request_status')} <span class="status-tag ${myApp.status}">${statusLabel(myApp.status)}</span><div class="msg" style="margin-top:6px;">${escapeHtml(myApp.message)}</div></div>` :
+          `<form id="appForm">
+            <div class="field"><label>${t('label_application_reason')}</label><textarea id="app-msg" required maxlength="500" placeholder="${t('application_placeholder')}"></textarea></div>
+            <button type="submit" class="btn">${t('btn_submit_form')}</button>
+          </form>`
+        }
+      </div>
+    `;
+    html += `
+      <div class="admin-section">
+        <h3>${t('contact_management_heading')}</h3>
+        <form id="msgForm">
+          <div class="field"><label>${t('label_message_detail')}</label><textarea id="msg-content" required maxlength="1000" placeholder="${t('message_placeholder')}"></textarea></div>
+          <button type="submit" class="btn">${t('btn_send_message')}</button>
+        </form>
+      </div>
+    `;
+  }
+
+  mainEl.innerHTML = html;
+
+  if(isFounder()){
+    document.querySelectorAll('[data-app-action]').forEach(btn => {
+      btn.onclick = async () => {
+        const row = btn.closest('.app-row');
+        const appId = row.dataset.appId;
+        const status = btn.dataset.appAction;
+        await supabase.from('admin_applications').update({ status }).eq('id', appId);
+        if(status === 'kabul'){
+          const { data: app } = await supabase.from('admin_applications').select('user_id').eq('id', appId).single();
+          if(app) await supabase.from('profiles').update({ role: 'admin' }).eq('id', app.user_id);
+        }
+        renderAdmin();
+      };
+    });
+  } else {
+    const appForm = document.getElementById('appForm');
+    if(appForm){
+      appForm.onsubmit = async (e) => {
+        e.preventDefault();
+        const message = document.getElementById('app-msg').value.trim();
+        if(!message) return;
+        await supabase.from('admin_applications').insert({ user_id: currentUser.id, message });
+        renderAdmin();
+      };
+    }
+    const msgForm = document.getElementById('msgForm');
+    if(msgForm){
+      msgForm.onsubmit = async (e) => {
+        e.preventDefault();
+        const content = document.getElementById('msg-content').value.trim();
+        if(!content) return;
+        await supabase.from('founder_messages').insert({ sender_id: currentUser.id, content });
+        alert(t('msg_sent_to_management'));
+        document.getElementById('msg-content').value = '';
+      };
+    }
+  }
+}
+
+/* ---------------- ROUTER ---------------- */
+function updateFooter(){
+  const f = document.getElementById('siteFooter');
+  if(f) f.textContent = t('footer_text');
+  baseTabTitle = currentLang === 'en' ? 'Strud WEB — Horror Community' : 'Strud WEB — Korku Topluluğu';
+  updateTabTitleBadge();
+}
+
+function render(){
+  if(!currentLang){ renderLanguageGate(); return; }
+  document.documentElement.lang = currentLang;
+  updateFooter();
+  if(currentUser && capacityFull){ renderCapacityFullScreen(); return; }
+  renderNav();
+  if(!currentUser){ renderAuthScreen(); return; }
+  if(!currentProfile){ renderCompleteProfile(); return; }
+
+  const route = currentRoute();
+
+  if(dmChannel && route !== ('dm/' + activeChatFriendId)){
+    supabase.removeChannel(dmChannel);
+    dmChannel = null;
+    activeChatFriendId = null;
+  }
+  if(feedChannel && !(CATEGORY_KEYS.includes(route))){
+    stopFeedRealtime();
+  }
+  if(adminChannel && route !== 'admin'){
+    stopAdminRealtime();
+  }
+
+  if(route === 'ana-sayfa'){
+    renderHome();
+  } else if(route === 'admin'){
+    renderAdmin();
+  } else if(route === 'destek'){
+    renderDestek();
+  } else if(route === 'arkadaslar'){
+    renderFriends();
+  } else if(route === 'bildirimler'){
+    renderNotifications();
+  } else if(route.startsWith('dm/')){
+    renderChat(route.slice(3));
+  } else if(CATEGORY_KEYS.includes(route)){
+    renderFeed(route);
+  } else {
+    window.location.hash = '#/ana-sayfa';
+  }
+}
+
+function renderCompleteProfile(){
+  mainEl.innerHTML = `
+    <div class="auth-wrap">
+      <img src="${LOGO_URI}" alt="Strud WEB logo" class="auth-logo">
+      <h1>STRUD WEB</h1>
+      <form id="completeForm">
+        <div class="field">
+          <label>${t('label_nickname')}</label>
+          <input type="text" id="cp-nickname" required maxlength="24">
+        </div>
+        <button type="submit" class="btn" style="width:100%;">${t('setup_complete_btn')}</button>
+        <div id="cp-error" class="error-msg"></div>
+      </form>
+      ${renderLangToggleHtml('cpLangToggle')}
+    </div>
+  `;
+  attachLangToggle('cpLangToggle');
+  document.getElementById('completeForm').onsubmit = async (e) => {
+    e.preventDefault();
+    const nickname = document.getElementById('cp-nickname').value.trim();
+    if(nickname.length < 3) return;
+    const { error } = await supabase.from('profiles').insert({ id: currentUser.id, nickname });
+    if(error){
+      document.getElementById('cp-error').textContent = t('err_nickname_taken');
+      return;
+    }
+    await refreshSession();
+    window.location.hash = '#/ana-sayfa';
+  };
+}
+
+window.addEventListener('hashchange', () => {
+  render();
+});
+supabase.auth.onAuthStateChange((_event, _session) => { });
+
+(async () => {
+  await refreshSession();
+})();
+
+</script>
+</body>
+</html>
