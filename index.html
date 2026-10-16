@@ -753,10 +753,60 @@ document.addEventListener('click', (e) => {
 
 /* ---------------- DOSYA YÜKLEME (Supabase Storage) ---------------- */
 const MAX_IMAGE_MB = 500;
-const MAX_VIDEO_MB = 1024; // 1 GB
+const MAX_VIDEO_MB = 1024; // Toplam video boyutu için üst sınır
 const MAX_AVATAR_MB = 10;
-const RESUMABLE_THRESHOLD = 6 * 1024 * 1024; // 6 MB üstü dosyalar parça parça (resumable) yüklenir
+// Supabase projesindeki 50 MB sınırına takılmamak için güvenli pay bırakıyoruz.
+// Büyük videolar bu boyuttan küçük parçalara ayrılarak ayrı Storage nesneleri olarak yüklenir.
+const VIDEO_PART_MB = 45;
+const RESUMABLE_THRESHOLD = 6 * 1024 * 1024; // 6 MB üstü dosyalar resumable olarak yüklenir
 let tusLib = null;
+
+function isVideoPartsManifest(value){
+  try{
+    const parsed = JSON.parse(value);
+    return !!(parsed && parsed.__strudVideoParts === 1 && Array.isArray(parsed.parts));
+  }catch(e){ return false; }
+}
+
+function getVideoParts(value){
+  if(!value) return [];
+  try{
+    const parsed = JSON.parse(value);
+    if(parsed && parsed.__strudVideoParts === 1 && Array.isArray(parsed.parts)) return parsed.parts;
+  }catch(e){}
+  return [value];
+}
+
+async function uploadSingleStorageObject(bucket, path, file, onProgress){
+  if(file.size > RESUMABLE_THRESHOLD){
+    await uploadResumable(bucket, path, file, onProgress);
+  }else{
+    const { error } = await supabase.storage.from(bucket).upload(path, file, {
+      cacheControl: '31536000', upsert: false, contentType: file.type || 'video/mp4'
+    });
+    if(error) throw error;
+    if(onProgress) onProgress(100);
+  }
+  return supabase.storage.from(bucket).getPublicUrl(path).data.publicUrl;
+}
+
+async function uploadVideoParts(bucket, file, onProgress){
+  const partBytes = VIDEO_PART_MB * 1024 * 1024;
+  const totalParts = Math.ceil(file.size / partBytes);
+  const urls = [];
+  for(let i = 0; i < totalParts; i++){
+    const start = i * partBytes;
+    const end = Math.min(file.size, start + partBytes);
+    const part = file.slice(start, end, file.type || 'video/mp4');
+    const ext = (file.name.split('.').pop() || 'mp4').toLowerCase().replace(/[^a-z0-9]/g, '') || 'mp4';
+    const path = `${currentUser.id}/${Date.now()}-${Math.random().toString(36).slice(2,8)}-part-${String(i + 1).padStart(3,'0')}.${ext}`;
+    const url = await uploadSingleStorageObject(bucket, path, part, pct => {
+      if(onProgress) onProgress(Math.floor(((i + pct / 100) / totalParts) * 100));
+    });
+    urls.push(url);
+  }
+  return JSON.stringify({ __strudVideoParts: 1, parts: urls });
+}
 
 async function uploadToStorage(bucket, file, kind, onProgress, maxMBOverride){
   const isImage = file.type.startsWith('image/');
@@ -767,7 +817,9 @@ async function uploadToStorage(bucket, file, kind, onProgress, maxMBOverride){
   const ext = (file.name.split('.').pop() || (isVideo ? 'mp4' : 'jpg')).toLowerCase().replace(/[^a-z0-9]/g, '');
   const rand = Math.random().toString(36).slice(2, 8);
   const path = `${currentUser.id}/${Date.now()}-${rand}.${ext}`;
-  if(file.size > RESUMABLE_THRESHOLD){
+  if(isVideo && file.size > VIDEO_PART_MB * 1024 * 1024){
+    return await uploadVideoParts(bucket, file, onProgress);
+  }else if(file.size > RESUMABLE_THRESHOLD){
     await uploadResumable(bucket, path, file, onProgress);
   } else {
     const { error } = await supabase.storage.from(bucket).upload(path, file, { cacheControl: '31536000', upsert: false, contentType: file.type });
@@ -1675,11 +1727,23 @@ function renderPostCard(p){
   }
 
   if(p.video_url) {
-    const ytId = extractYouTubeId(p.video_url);
-    if(ytId) {
-      mediaHtml += `<div class="post-media-wrap"><div class="post-video-container"><div class="yt-facade" data-yt="${ytId}" style="background-image:url('https://i.ytimg.com/vi/${ytId}/hqdefault.jpg')"><span>▶</span></div></div></div>`;
-    } else if(p.video_url.startsWith('http')) {
-      mediaHtml += `<div class="post-media-wrap"><video src="${escapeHtml(p.video_url)}" class="post-video-element" controls preload="none"></video></div>`;
+    const videoParts = getVideoParts(p.video_url);
+    if(videoParts.length > 1) {
+      mediaHtml += `<div class="post-media-wrap" style="padding:14px;">
+        <div style="color:var(--text-dim);font-family:'IBM Plex Mono',monospace;font-size:11px;margin-bottom:8px;">VIDEO PARÇALARI (${videoParts.length})</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          ${videoParts.map((url, i) => `<a class="btn ghost small" href="${escapeHtml(url)}" target="_blank" rel="noopener">▶ Video parçası ${i + 1}/${videoParts.length} — indir</a>`).join('')}
+        </div>
+        <div style="color:var(--text-dim);font-size:11px;margin-top:8px;">Parçalar Supabase sınırı nedeniyle ayrı yüklenmiştir.</div>
+      </div>`;
+    } else {
+      const singleVideoUrl = videoParts[0] || '';
+      const ytId = extractYouTubeId(singleVideoUrl);
+      if(ytId) {
+        mediaHtml += `<div class="post-media-wrap"><div class="post-video-container"><div class="yt-facade" data-yt="${ytId}" style="background-image:url('https://i.ytimg.com/vi/${ytId}/hqdefault.jpg')"><span>▶</span></div></div></div>`;
+      } else if(singleVideoUrl.startsWith('http')) {
+        mediaHtml += `<div class="post-media-wrap"><video src="${escapeHtml(singleVideoUrl)}" class="post-video-element" controls preload="none"></video></div>`;
+      }
     }
   }
 
