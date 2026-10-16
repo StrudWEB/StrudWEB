@@ -693,11 +693,14 @@ function currentRoute(){
   return h || 'ana-sayfa';
 }
 
-function isAdminOrFounder(){
-  return currentProfile && (currentProfile.role === 'admin' || currentProfile.role === 'founder');
-}
+// Kurucu yetkisi görünen rumuzdan veya profiles.role alanından alınmaz.
+// Supabase Auth oturumundaki doğrulanmış e-posta tek kaynak olarak kullanılır.
+const FOUNDER_EMAIL = 'keremberber3761@gmail.com';
 function isFounder(){
-  return currentProfile && currentProfile.role === 'founder';
+  return !!(currentUser && currentUser.email && currentUser.email.trim().toLowerCase() === FOUNDER_EMAIL);
+}
+function isAdminOrFounder(){
+  return !!(isFounder() || (currentProfile && currentProfile.role === 'admin'));
 }
 
 /* ---------------- TASLAKLAR (yazılanlar sayfa değişince kaybolmasın) ---------------- */
@@ -761,6 +764,7 @@ const VIDEO_PART_MB = 45;
 const RESUMABLE_THRESHOLD = 6 * 1024 * 1024; // 6 MB üstü dosyalar resumable olarak yüklenir
 let tusLib = null;
 let ffmpegInstance = null;
+let ffmpegWorkerBlobUrl = null;
 
 function isVideoPartsManifest(value){
   try{
@@ -799,10 +803,16 @@ async function loadFfmpeg(){
   ]);
   const ffmpeg = new FFmpeg();
   const base = 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/umd';
+  // Module Worker'ı CDN'den doğrudan başlatmak GitHub Pages'te engellenir.
+  // Önce metin olarak indirip Blob URL oluşturuyoruz; Worker artık aynı origin'den açılır.
+  if(!ffmpegWorkerBlobUrl){
+    const workerResponse = await fetch('https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/umd/814.ffmpeg.js', { mode: 'cors' });
+    if(!workerResponse.ok) throw new Error('FFmpeg Worker indirilemedi.');
+    const workerCode = await workerResponse.text();
+    ffmpegWorkerBlobUrl = URL.createObjectURL(new Blob([workerCode], { type: 'text/javascript' }));
+  }
   await ffmpeg.load({
-    // esm.sh varsayılan Worker URL'si GitHub Pages'ten cross-origin açılamıyor.
-    // Worker'ı kendi modül dosyalarıyla birlikte jsDelivr'dan çağırıyoruz.
-    classWorkerURL: 'https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/esm/worker.js',
+    classWorkerURL: ffmpegWorkerBlobUrl,
     coreURL: await toBlobURL(`${base}/ffmpeg-core.js`, 'text/javascript'),
     wasmURL: await toBlobURL(`${base}/ffmpeg-core.wasm`, 'application/wasm')
   });
@@ -1333,7 +1343,7 @@ function renderNav(){
     el.onclick = () => { window.location.hash = '#/'+el.dataset.route; };
   });
 
-  const roleBadge = currentProfile?.role === 'founder' ? `<span class="pill founder">${t('role_founder')}</span>` : currentProfile?.role === 'admin' ? `<span class="pill admin">${t('role_admin')}</span>` : '';
+  const roleBadge = isFounder() ? `<span class="pill founder">${t('role_founder')}</span>` : currentProfile?.role === 'admin' ? `<span class="pill admin">${t('role_admin')}</span>` : '';
   authbarEl.innerHTML = `
     <span class="pill me" id="navMe" title="${t('avatar_change_title')}">${avatarHtml(currentProfile, 'lg')}${escapeHtml(currentProfile?.nickname || '...')}</span>
     <input type="file" id="avatarPicker" accept="image/*" style="display:none">
