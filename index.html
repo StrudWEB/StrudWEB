@@ -753,13 +753,14 @@ document.addEventListener('click', (e) => {
 
 /* ---------------- DOSYA YÜKLEME (Supabase Storage) ---------------- */
 const MAX_IMAGE_MB = 500;
-const MAX_VIDEO_MB = 1024; // Toplam video boyutu için üst sınır
+const MAX_VIDEO_MB = 1024; // FFmpeg ile segmentlenmiş toplam video için üst sınır
 const MAX_AVATAR_MB = 10;
 // Supabase projesindeki 50 MB sınırına takılmamak için güvenli pay bırakıyoruz.
 // Büyük videolar bu boyuttan küçük parçalara ayrılarak ayrı Storage nesneleri olarak yüklenir.
 const VIDEO_PART_MB = 45;
 const RESUMABLE_THRESHOLD = 6 * 1024 * 1024; // 6 MB üstü dosyalar resumable olarak yüklenir
 let tusLib = null;
+let ffmpegInstance = null;
 
 function isVideoPartsManifest(value){
   try{
@@ -790,31 +791,54 @@ async function uploadSingleStorageObject(bucket, path, file, onProgress){
   return supabase.storage.from(bucket).getPublicUrl(path).data.publicUrl;
 }
 
+async function loadFfmpeg(){
+  if(ffmpegInstance) return ffmpegInstance;
+  const [{ FFmpeg }, { fetchFile, toBlobURL }] = await Promise.all([
+    import('https://esm.sh/@ffmpeg/ffmpeg@0.12.10'),
+    import('https://esm.sh/@ffmpeg/util@0.12.1')
+  ]);
+  const ffmpeg = new FFmpeg();
+  const base = 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/umd';
+  await ffmpeg.load({
+    coreURL: await toBlobURL(`${base}/ffmpeg-core.js`, 'text/javascript'),
+    wasmURL: await toBlobURL(`${base}/ffmpeg-core.wasm`, 'application/wasm')
+  });
+  ffmpegInstance = { ffmpeg, fetchFile };
+  return ffmpegInstance;
+}
+
 async function uploadVideoParts(bucket, file, onProgress){
-  const partBytes = VIDEO_PART_MB * 1024 * 1024;
-  const totalParts = Math.ceil(file.size / partBytes);
-  const urls = new Array(totalParts);
-  let nextPart = 0;
-  let completedParts = 0;
-  const uploadPart = async () => {
-    while(true){
-      const i = nextPart++;
-      if(i >= totalParts) return;
-    const start = i * partBytes;
-    const end = Math.min(file.size, start + partBytes);
-    const part = file.slice(start, end, file.type || 'video/mp4');
-    const ext = (file.name.split('.').pop() || 'mp4').toLowerCase().replace(/[^a-z0-9]/g, '') || 'mp4';
-    const path = `${currentUser.id}/${Date.now()}-${Math.random().toString(36).slice(2,8)}-part-${String(i + 1).padStart(3,'0')}.${ext}`;
-    const url = await uploadSingleStorageObject(bucket, path, part, pct => {
-        if(onProgress) onProgress(Math.floor(((completedParts + pct / 100) / totalParts) * 100));
-    });
-      urls[i] = url;
-      completedParts++;
-      if(onProgress) onProgress(Math.floor((completedParts / totalParts) * 100));
-    }
-  };
-  // Üç parçayı aynı anda yükleyerek toplam bekleme süresini azaltır.
-  await Promise.all(Array.from({length: Math.min(3, totalParts)}, () => uploadPart()));
+  const { ffmpeg, fetchFile } = await loadFfmpeg();
+  const inputName = `input-${Date.now()}.mp4`;
+  const outputPattern = 'strud-part-%03d.mp4';
+  await ffmpeg.writeFile(inputName, await fetchFile(file));
+  // Bir dakikalık, bağımsız ve oynatılabilir MP4 parçaları üretir.
+  // Yeniden kodlama, parçaların ham byte değil gerçek video olmasını sağlar.
+  await ffmpeg.exec([
+    '-i', inputName,
+    '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '28', '-pix_fmt', 'yuv420p',
+    '-c:a', 'aac', '-b:a', '128k',
+    '-force_key_frames', 'expr:gte(t,n_forced*60)',
+    '-f', 'segment', '-segment_time', '60', '-reset_timestamps', '1',
+    '-movflags', '+faststart', outputPattern
+  ]);
+  const files = await ffmpeg.listDir('.');
+  const segmentNames = files.map(x => x.name)
+    .filter(name => /^strud-part-\d+\.mp4$/.test(name))
+    .sort();
+  if(!segmentNames.length) throw new Error('Video segmentlere ayrıştırılamadı.');
+  const urls = [];
+  for(let i = 0; i < segmentNames.length; i++){
+    const data = await ffmpeg.readFile(segmentNames[i]);
+    const part = new File([data], segmentNames[i], { type: 'video/mp4' });
+    const path = `${currentUser.id}/${Date.now()}-${Math.random().toString(36).slice(2,8)}-part-${String(i + 1).padStart(3,'0')}.mp4`;
+    urls.push(await uploadSingleStorageObject(bucket, path, part, pct => {
+      if(onProgress) onProgress(Math.floor(((i + pct / 100) / segmentNames.length) * 100));
+    }));
+    if(onProgress) onProgress(Math.floor(((i + 1) / segmentNames.length) * 100));
+    await ffmpeg.deleteFile(segmentNames[i]);
+  }
+  await ffmpeg.deleteFile(inputName);
   return JSON.stringify({ __strudVideoParts: 1, parts: urls });
 }
 
@@ -1762,10 +1786,10 @@ function renderPostCard(p){
     if(videoParts.length > 1) {
       mediaHtml += `<div class="post-media-wrap" style="padding:14px;">
         <div style="color:var(--text-dim);font-family:'IBM Plex Mono',monospace;font-size:11px;margin-bottom:8px;">VIDEO PARÇALARI (${videoParts.length})</div>
-        <div style="display:flex;flex-direction:column;gap:6px;">
-          ${videoParts.map((url, i) => `<a class="btn ghost small" href="${escapeHtml(url)}" target="_blank" rel="noopener">▶ Video parçası ${i + 1}/${videoParts.length} — indir</a>`).join('')}
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          ${videoParts.map((url, i) => `<div><div style="color:var(--text-dim);font-size:11px;margin-bottom:4px;">Parça ${i + 1}/${videoParts.length}</div><video src="${escapeHtml(url)}" class="post-video-element" controls preload="metadata" style="width:100%;"></video></div>`).join('')}
         </div>
-        <div style="color:var(--text-dim);font-size:11px;margin-top:8px;">Parçalar Supabase sınırı nedeniyle ayrı yüklenmiştir.</div>
+        <div style="color:var(--text-dim);font-size:11px;margin-top:8px;">Video, oynatılabilir MP4 parçaları olarak yüklenmiştir.</div>
       </div>`;
     } else {
       const singleVideoUrl = videoParts[0] || '';
