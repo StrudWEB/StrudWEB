@@ -800,6 +800,9 @@ async function loadFfmpeg(){
   const ffmpeg = new FFmpeg();
   const base = 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/umd';
   await ffmpeg.load({
+    // esm.sh varsayılan Worker URL'si GitHub Pages'ten cross-origin açılamıyor.
+    // Worker'ı kendi modül dosyalarıyla birlikte jsDelivr'dan çağırıyoruz.
+    classWorkerURL: 'https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/esm/worker.js',
     coreURL: await toBlobURL(`${base}/ffmpeg-core.js`, 'text/javascript'),
     wasmURL: await toBlobURL(`${base}/ffmpeg-core.wasm`, 'application/wasm')
   });
