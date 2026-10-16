@@ -793,19 +793,34 @@ async function uploadSingleStorageObject(bucket, path, file, onProgress){
 async function uploadVideoParts(bucket, file, onProgress){
   const partBytes = VIDEO_PART_MB * 1024 * 1024;
   const totalParts = Math.ceil(file.size / partBytes);
-  const urls = [];
-  for(let i = 0; i < totalParts; i++){
+  const urls = new Array(totalParts);
+  let nextPart = 0;
+  let completedParts = 0;
+  const uploadPart = async () => {
+    while(true){
+      const i = nextPart++;
+      if(i >= totalParts) return;
     const start = i * partBytes;
     const end = Math.min(file.size, start + partBytes);
     const part = file.slice(start, end, file.type || 'video/mp4');
     const ext = (file.name.split('.').pop() || 'mp4').toLowerCase().replace(/[^a-z0-9]/g, '') || 'mp4';
     const path = `${currentUser.id}/${Date.now()}-${Math.random().toString(36).slice(2,8)}-part-${String(i + 1).padStart(3,'0')}.${ext}`;
     const url = await uploadSingleStorageObject(bucket, path, part, pct => {
-      if(onProgress) onProgress(Math.floor(((i + pct / 100) / totalParts) * 100));
+        if(onProgress) onProgress(Math.floor(((completedParts + pct / 100) / totalParts) * 100));
     });
-    urls.push(url);
-  }
+      urls[i] = url;
+      completedParts++;
+      if(onProgress) onProgress(Math.floor((completedParts / totalParts) * 100));
+    }
+  };
+  // Üç parçayı aynı anda yükleyerek toplam bekleme süresini azaltır.
+  await Promise.all(Array.from({length: Math.min(3, totalParts)}, () => uploadPart()));
   return JSON.stringify({ __strudVideoParts: 1, parts: urls });
+}
+
+function getVideoFieldValue(input){
+  if(input && input.dataset.videoParts) return input.dataset.videoParts;
+  return input ? input.value.trim() : '';
 }
 
 async function uploadToStorage(bucket, file, kind, onProgress, maxMBOverride){
@@ -836,6 +851,14 @@ function enhanceUploadFields(root){
     if(input.dataset.uploadReady) return;
     input.dataset.uploadReady = '1';
     const kind = input.dataset.upload;
+    // Eski kayıtlardaki manifesti URL alanında JSON olarak göstermeyiz.
+    if(kind === 'video' && isVideoPartsManifest(input.value)){
+      input.dataset.videoParts = input.value;
+      input.value = getVideoParts(input.value)[0] || '';
+    }
+    input.addEventListener('input', () => {
+      if(kind === 'video') delete input.dataset.videoParts;
+    });
     const row = document.createElement('div');
     row.className = 'upload-row';
     row.innerHTML = `<button type="button" class="btn ghost small">${t('btn_upload_pc')}</button><span class="upload-status"></span>`;
@@ -857,7 +880,13 @@ function enhanceUploadFields(root){
       if(submitBtn) submitBtn.disabled = true;
       try{
         const url = await uploadToStorage('post-media', file, kind, pct => { status.textContent = t('upload_uploading') + ' %' + pct; });
-        input.value = url;
+        if(kind === 'video' && isVideoPartsManifest(url)){
+          input.dataset.videoParts = url;
+          input.value = getVideoParts(url)[0] || '';
+        }else{
+          delete input.dataset.videoParts;
+          input.value = url;
+        }
         status.textContent = t('upload_done');
       }catch(err){
         status.className = 'upload-status err';
@@ -1599,7 +1628,8 @@ async function renderFeed(category){
     const special_link = specialLinkInput ? specialLinkInput.value.trim() : null;
 
     const image_url = document.getElementById('np-image-url').value.trim() || null;
-    const video_url = document.getElementById('np-video-url').value.trim() || null;
+    const videoInput = document.getElementById('np-video-url');
+    const video_url = getVideoFieldValue(videoInput) || null;
     const image_url_2 = document.getElementById('np-image-url-2').value.trim() || null;
     const image_url_3 = document.getElementById('np-image-url-3').value.trim() || null;
     const is_spoiler = document.getElementById('np-spoiler').checked;
@@ -1625,6 +1655,7 @@ async function renderFeed(category){
 
     setDraft('post:' + category, null);
     e.target.reset();
+    delete document.getElementById('np-video-url').dataset.videoParts;
     e.target.querySelectorAll('.upload-status').forEach(el => el.textContent = '');
     counter.textContent = "0 / 4000";
 
@@ -1844,7 +1875,8 @@ function startEditPost(postId){
     const title = card.querySelector('.edit-title').value.trim();
     const content = card.querySelector('.edit-content').value.trim();
     const image_url = card.querySelector('.edit-image-url').value.trim() || null;
-    const video_url = card.querySelector('.edit-video-url').value.trim() || null;
+    const videoInput = card.querySelector('.edit-video-url');
+    const video_url = getVideoFieldValue(videoInput) || null;
     const image_url_2 = card.querySelector('.edit-image-url-2').value.trim() || null;
     const image_url_3 = card.querySelector('.edit-image-url-3').value.trim() || null;
     const specialInput = card.querySelector('.edit-special-link');
