@@ -334,6 +334,57 @@ function getVideoParts(v){
 }
 const isVideoPartsManifest = v => { try{ const p = JSON.parse(v); return !!(p && p.__strudVideoParts === 1 && Array.isArray(p.parts)); }catch(e){ return false; } };
 
+async function signedGameUrls(chunks){
+  const out = [];
+  for(const c of chunks){
+    if(c.url && !c.path){ out.push(c.url); continue; }
+    const { data, error } = await supabase.storage.from('games').createSignedUrl(c.path, 600);
+    if(error) throw error; out.push(data.signedUrl);
+  }
+  return out;
+}
+
+async function downloadMergedBinary(urls, fileName, mime, button){
+  const old = button.textContent; button.disabled = true;
+  try{
+    const blobs = [];
+    for(let i = 0; i < urls.length; i++){
+      button.textContent = `İndiriliyor ${i + 1}/${urls.length}...`;
+      const r = await fetch(urls[i]);
+      if(!r.ok) throw new Error(`Parça ${i + 1} indirilemedi (${r.status})`);
+      blobs.push(await r.blob());
+    }
+    const blob = new Blob(blobs, { type: mime || 'application/octet-stream' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = fileName;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 60000);
+  }catch(err){ alert('Birleştirme başarısız: ' + (err.message || err)); }
+  finally{ button.disabled = false; button.textContent = old; }
+}
+
+async function downloadMergedVideo(urls, fileName, button){
+  const old = button.textContent; button.disabled = true;
+  try{
+    const { ffmpeg, fetchFile } = await loadFfmpeg();
+    const names = [];
+    for(let i = 0; i < urls.length; i++){
+      button.textContent = `Video hazırlanıyor ${i + 1}/${urls.length}...`;
+      const r = await fetch(urls[i]); if(!r.ok) throw new Error(`Video parçası ${i + 1} indirilemedi`);
+      const name = `merge-part-${String(i).padStart(4,'0')}.mp4`;
+      await ffmpeg.writeFile(name, await fetchFile(await r.blob())); names.push(name);
+    }
+    const list = names.map(n => `file '${n}'`).join('\n');
+    await ffmpeg.writeFile('merge-list.txt', new TextEncoder().encode(list));
+    await ffmpeg.exec(['-f','concat','-safe','0','-i','merge-list.txt','-c','copy','merged-video.mp4']);
+    const out = await ffmpeg.readFile('merged-video.mp4');
+    const blob = new Blob([out.buffer], { type: 'video/mp4' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = fileName;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 60000);
+    for(const n of [...names, 'merge-list.txt', 'merged-video.mp4']){ try{ await ffmpeg.deleteFile(n); }catch(e){} }
+  }catch(err){ alert('Video birleştirilemedi: ' + (err.message || err)); }
+  finally{ button.disabled = false; button.textContent = old; }
+}
+
 async function uploadResumable(bucket, path, file, onProgress){
   if(!window.tus){
     await new Promise((res, rej) => {
@@ -751,7 +802,8 @@ async function renderGames(){
         st.textContent = t('game_published');
         renderGames();
       }catch(err){
-        if(uploaded.length) supabase.storage.from('games').remove(uploaded.map(u => u.path));
+        const failedPaths = uploaded.flatMap(u => u.chunked && Array.isArray(u.chunks) ? u.chunks.map(c => c.path) : [u.path]).filter(Boolean);
+        if(failedPaths.length) for(let i = 0; i < failedPaths.length; i += 100) await supabase.storage.from('games').remove(failedPaths.slice(i, i + 100));
         st.className = 'upload-status err'; st.textContent = t('err_upload') + (err.message || '');
         btn.disabled = false;
       }
@@ -770,11 +822,19 @@ async function loadGames(){
     <div class="post-meta"><span>${timeAgo(g.created_at)}</span></div>
     <div class="post-title">${escapeHtml(g.title)}</div>
     <div class="post-content">${escapeHtml(g.description || '')}</div>
-    ${(g.files || []).map(f => f.chunked && Array.isArray(f.chunks)
-      ? `<div class="file-chip" style="display:block"><div style="margin-bottom:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(f.name)} · ${fmtSize(f.size)} · ${f.chunks.length} parça</div><div style="display:flex;gap:6px;flex-wrap:wrap">${f.chunks.map((c, i) => `<a class="btn small" href="${safeUrl(c.url)}" download target="_blank" rel="noopener">${t('btn_download')} ${i + 1}/${f.chunks.length} (${fmtSize(c.size)})</a>`).join('')}</div></div>`
-      : `<div class="file-chip"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(f.name)} · ${fmtSize(f.size)}</span><a class="btn small" href="${safeUrl(f.url)}" download target="_blank" rel="noopener">${t('btn_download')}</a></div>`).join('')}
+    ${(g.files || []).map((f, fi) => f.chunked && Array.isArray(f.chunks)
+      ? `<div class="file-chip"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(f.name)} · ${fmtSize(f.size)}</span><button class="btn small" data-download-game="${g.id}" data-file-index="${fi}">⬇ ZIP’i indir</button></div>`
+      : `<div class="file-chip"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(f.name)} · ${fmtSize(f.size)}</span><button class="btn small" data-download-old-game="${g.id}" data-file-index="${fi}">⬇ İndir</button></div>`).join('')}
     ${isFounder() ? `<div class="post-actions"><button class="react-btn" data-del-game="${g.id}" style="margin-left:auto;color:#e26f6f">${t('delete_btn')}</button></div>` : ''}
   </div>`).join('');
+  el.querySelectorAll('[data-download-game]').forEach(b => b.onclick = async () => {
+    const g = data.find(x => String(x.id) === b.dataset.downloadGame), f = g?.files?.[+b.dataset.fileIndex];
+    if(f?.chunks) await downloadMergedBinary(await signedGameUrls(f.chunks.sort((a,b) => a.index - b.index)), f.name, 'application/zip', b);
+  });
+  el.querySelectorAll('[data-download-old-game]').forEach(b => b.onclick = async () => {
+    const g = data.find(x => String(x.id) === b.dataset.downloadOldGame), f = g?.files?.[+b.dataset.fileIndex];
+    if(f?.url) await downloadMergedBinary(await signedGameUrls([f]), f.name, 'application/octet-stream', b);
+  });
   el.querySelectorAll('[data-del-game]').forEach(b => b.onclick = async () => {
     if(!confirm(t('confirm_delete_game'))) return;
     const g = data.find(x => String(x.id) === b.dataset.delGame);
@@ -959,7 +1019,7 @@ function renderPostCard(p){
   if(p.video_url){
     const parts = getVideoParts(p.video_url);
     if(parts.length > 1){
-      media += `<div class="post-media-wrap" style="padding:14px">${parts.map((u, i) => `<div style="margin-bottom:10px"><div style="color:var(--dim);font-size:11px;margin-bottom:4px">${i+1}/${parts.length}</div><video src="${escapeHtml(u)}" class="post-video-element" controls preload="none"></video></div>`).join('')}</div>`;
+      media += `<div class="post-media-wrap" style="padding:14px;text-align:center"><div style="color:var(--dim);font-size:12px;margin-bottom:10px">Video parçaları gizli tutulur.</div><button class="btn small" data-action="download-video" data-video-parts="${escapeHtml(JSON.stringify(parts))}">⬇ Videoyu tek dosya indir</button></div>`;
     } else {
       const u = parts[0] || '', yt = extractYouTubeId(u);
       if(yt) media += `<div class="post-media-wrap"><div class="post-video-container"><div class="yt-facade" data-yt="${yt}" style="background-image:url('https://i.ytimg.com/vi/${yt}/hqdefault.jpg')"><span>▶</span></div></div></div>`;
@@ -1033,6 +1093,9 @@ function attachPostHandlers(category){
       } else if(a === 'report'){
         const msg = prompt(t('report_prompt'));
         if(msg){ await supabase.from('founder_messages').insert({ sender_id: currentUser.id, content: `[RAPOR - ID:${postId}] ${msg}` }); alert(t('report_success')); }
+      } else if(a === 'download-video'){
+        let urls = []; try{ urls = JSON.parse(btn.dataset.videoParts || '[]'); }catch(e){}
+        if(urls.length) await downloadMergedVideo(urls, `video-${postId}.mp4`, btn);
       } else if(a === 'reveal-spoiler'){
         const w = card.querySelector('.spoiler-wrap');
         if(w){ w.querySelector('.spoiler-blur')?.classList.remove('spoiler-blur'); w.querySelector('.spoiler-overlay')?.remove(); }
