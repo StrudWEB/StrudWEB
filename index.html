@@ -324,6 +324,7 @@ document.addEventListener('click', e => {
 /* ================= YÜKLEME (Storage) ================= */
 const MAX_IMAGE_MB = 500, MAX_VIDEO_MB = 1024, MAX_AVATAR_MB = 10, MAX_GAME_MB = 4096;
 const VIDEO_PART_MB = 45, RESUMABLE_THRESHOLD = 6 * 1024 * 1024;
+const GAME_CHUNK_MB = 32, GAME_CHUNK_BYTES = GAME_CHUNK_MB * 1024 * 1024;
 let ffmpegInstance = null, ffmpegWorkerBlobUrl = null;
 
 function getVideoParts(v){
@@ -724,11 +725,21 @@ async function renderGames(){
         const total = pendingGameFiles.reduce((s, f) => s + f.size, 0); let done = 0;
         for(const f of pendingGameFiles){
           const safe = f.name.replace(/[^a-zA-Z0-9._-]/g, '_');
-          const path = `${currentUser.id}/${Date.now()}-${Math.random().toString(36).slice(2,6)}-${safe}`;
-          st.textContent = `${t('upload_uploading')} ${f.name}`;
-          const url = await putFile('games', path, f, p => { barI.style.width = Math.floor((done + f.size * p / 100) / total * 100) + '%'; });
-          done += f.size;
-          uploaded.push({ name: f.name, size: f.size, url, path });
+          const fileId = `${Date.now()}-${Math.random().toString(36).slice(2,8)}-${safe}`;
+          const chunks = [], count = Math.ceil(f.size / GAME_CHUNK_BYTES);
+          for(let i = 0; i < count; i++){
+            const start = i * GAME_CHUNK_BYTES, end = Math.min(start + GAME_CHUNK_BYTES, f.size);
+            const part = f.slice(start, end, f.type || 'application/octet-stream');
+            const partName = `${fileId}.part-${String(i + 1).padStart(4, '0')}-of-${String(count).padStart(4, '0')}`;
+            const path = `${currentUser.id}/${partName}`;
+            st.textContent = `${t('upload_uploading')} ${f.name} — ${i + 1}/${count}`;
+            const url = await putFile('games', path, part, p => {
+              barI.style.width = Math.floor((done + part.size * p / 100) / total * 100) + '%';
+            });
+            chunks.push({ index: i + 1, total: count, name: `${f.name} — parça ${i + 1}/${count}`, size: part.size, url, path });
+            done += part.size;
+          }
+          uploaded.push({ name: f.name, size: f.size, chunked: true, chunkSize: GAME_CHUNK_BYTES, chunks });
         }
         const { error } = await supabase.from('games').insert({
           title: document.getElementById('g-title').value.trim(),
@@ -759,7 +770,9 @@ async function loadGames(){
     <div class="post-meta"><span>${timeAgo(g.created_at)}</span></div>
     <div class="post-title">${escapeHtml(g.title)}</div>
     <div class="post-content">${escapeHtml(g.description || '')}</div>
-    ${(g.files || []).map(f => `<div class="file-chip"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(f.name)} · ${fmtSize(f.size)}</span><a class="btn small" href="${safeUrl(f.url)}" download target="_blank" rel="noopener">${t('btn_download')}</a></div>`).join('')}
+    ${(g.files || []).map(f => f.chunked && Array.isArray(f.chunks)
+      ? `<div class="file-chip" style="display:block"><div style="margin-bottom:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(f.name)} · ${fmtSize(f.size)} · ${f.chunks.length} parça</div><div style="display:flex;gap:6px;flex-wrap:wrap">${f.chunks.map((c, i) => `<a class="btn small" href="${safeUrl(c.url)}" download target="_blank" rel="noopener">${t('btn_download')} ${i + 1}/${f.chunks.length} (${fmtSize(c.size)})</a>`).join('')}</div></div>`
+      : `<div class="file-chip"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(f.name)} · ${fmtSize(f.size)}</span><a class="btn small" href="${safeUrl(f.url)}" download target="_blank" rel="noopener">${t('btn_download')}</a></div>`).join('')}
     ${isFounder() ? `<div class="post-actions"><button class="react-btn" data-del-game="${g.id}" style="margin-left:auto;color:#e26f6f">${t('delete_btn')}</button></div>` : ''}
   </div>`).join('');
   el.querySelectorAll('[data-del-game]').forEach(b => b.onclick = async () => {
@@ -767,8 +780,10 @@ async function loadGames(){
     const g = data.find(x => String(x.id) === b.dataset.delGame);
     const { error } = await supabase.from('games').delete().eq('id', g.id);
     if(error){ alert(t('err_action_failed') + error.message); return; }
-    const paths = (g.files || []).map(f => f.path).filter(Boolean);
-    if(paths.length) await supabase.storage.from('games').remove(paths);
+    const paths = (g.files || []).flatMap(f => f.chunked && Array.isArray(f.chunks)
+      ? f.chunks.map(c => c.path).filter(Boolean)
+      : [f.path].filter(Boolean));
+    if(paths.length) for(let i = 0; i < paths.length; i += 100) await supabase.storage.from('games').remove(paths.slice(i, i + 100));
     loadGames();
   });
 }
