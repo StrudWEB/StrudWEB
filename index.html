@@ -334,32 +334,32 @@ function getVideoParts(v){
 }
 const isVideoPartsManifest = v => { try{ const p = JSON.parse(v); return !!(p && p.__strudVideoParts === 1 && Array.isArray(p.parts)); }catch(e){ return false; } };
 
-async function signedGameUrls(chunks){
-  const out = [];
-  for(const c of chunks){
-    if(c.url && !c.path){ out.push(c.url); continue; }
-    const { data, error } = await supabase.storage.from('games').createSignedUrl(c.path, 600);
-    if(error) throw error; out.push(data.signedUrl);
-  }
-  return out;
-}
+const DOWNLOADER_URL = SUPABASE_URL + '/storage/v1/object/public/downloader/STRUD-Downloader.exe';
+const toHex = buf => [...new Uint8Array(buf)].map(x => x.toString(16).padStart(2, '0')).join('');
+const toB64 = u8 => { let s = ''; for(let i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000)); return btoa(s); };
 
-async function downloadMergedBinary(urls, fileName, mime, button){
-  const old = button.textContent; button.disabled = true;
+// Oyun ZIP'ini tarayıcıda parçalara böler, AES-256-GCM ile şifreler, private 'games' bucket'ına yükler.
+// Parça biçimi: [12 bayt iv][şifreli veri + 16 bayt etiket], AAD = parça numarası (0'dan).
+async function encryptGameChunks(file, folder, onProgress){
+  const raw = crypto.getRandomValues(new Uint8Array(32));
+  const key = await crypto.subtle.importKey('raw', raw, 'AES-GCM', false, ['encrypt']);
+  const count = Math.ceil(file.size / GAME_CHUNK_BYTES), chunks = [], paths = [];
   try{
-    const blobs = [];
-    for(let i = 0; i < urls.length; i++){
-      button.textContent = `İndiriliyor ${i + 1}/${urls.length}...`;
-      const r = await fetch(urls[i]);
-      if(!r.ok) throw new Error(`Parça ${i + 1} indirilemedi (${r.status})`);
-      blobs.push(await r.blob());
+    for(let i = 0; i < count; i++){
+      const plain = await file.slice(i * GAME_CHUNK_BYTES, Math.min((i + 1) * GAME_CHUNK_BYTES, file.size)).arrayBuffer();
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv, additionalData: new TextEncoder().encode(String(i)) }, key, plain));
+      const blob = new Uint8Array(12 + ct.length); blob.set(iv, 0); blob.set(ct, 12);
+      const path = `${folder}/${String(i).padStart(4, '0')}.bin`;
+      await putFile('games', path, new Blob([blob], { type: 'application/octet-stream' }), p => onProgress(i, count, p));
+      paths.push(path);
+      chunks.push({ i, path, size: blob.length, plainSize: plain.byteLength, sha256: toHex(await crypto.subtle.digest('SHA-256', blob)) });
     }
-    const blob = new Blob(blobs, { type: mime || 'application/octet-stream' });
-    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = fileName;
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(a.href), 60000);
-  }catch(err){ alert('Birleştirme başarısız: ' + (err.message || err)); }
-  finally{ button.disabled = false; button.textContent = old; }
+  }catch(err){
+    if(paths.length) await supabase.storage.from('games').remove(paths);
+    throw err;
+  }
+  return { key: toB64(raw), chunks, paths };
 }
 
 async function downloadMergedVideo(urls, fileName, button){
@@ -739,6 +739,7 @@ async function renderGames(){
       <form id="gameForm">
         <div class="field"><label>${t('label_game_title')}</label><input type="text" id="g-title" maxlength="120" required></div>
         <div class="field"><label>${t('label_game_desc')}</label><textarea id="g-desc" maxlength="4000"></textarea></div>
+        <div class="field"><label>ÇALIŞTIRILACAK EXE (ZIP İÇİNDEKİ YOL, ÖR: AroundNature.exe)</label><input type="text" id="g-exe" maxlength="200" required></div>
         <div class="field"><label>${t('label_game_cover')}</label><input type="url" id="g-cover" data-upload="image" placeholder="https://..."></div>
         <div class="dropzone" id="dropzone">${t('drop_hint')}</div>
         <input type="file" id="gamePicker" multiple style="display:none">
@@ -752,10 +753,9 @@ async function renderGames(){
   if(founder){
     const dz = document.getElementById('dropzone'), picker = document.getElementById('gamePicker');
     const add = files => {
-      for(const f of files){
-        if(f.size > MAX_GAME_MB * 1048576){ alert(t('err_file_too_big').replace('{n}', MAX_GAME_MB)); continue; }
-        pendingGameFiles.push(f);
-      }
+      const f = files[0]; if(!f) return;
+      if(f.size > MAX_GAME_MB * 1048576){ alert(t('err_file_too_big').replace('{n}', MAX_GAME_MB)); return; }
+      pendingGameFiles = [f];
       renderPendingFiles();
     };
     dz.onclick = () => picker.click();
@@ -768,42 +768,34 @@ async function renderGames(){
     document.getElementById('gameForm').onsubmit = async e => {
       e.preventDefault();
       if(!isFounder()) return;
-      if(!pendingGameFiles.length){ alert(t('err_need_files')); return; }
+      const f = pendingGameFiles[0];
+      if(!f){ alert(t('err_need_files')); return; }
       const btn = e.target.querySelector('button[type="submit"]'), bar = document.getElementById('gProgress'), barI = bar.firstElementChild, st = document.getElementById('gStatus');
       btn.disabled = true; bar.classList.remove('hidden'); st.className = 'upload-status';
-      const uploaded = [];
+      let up = null, gameId = null;
       try{
-        const total = pendingGameFiles.reduce((s, f) => s + f.size, 0); let done = 0;
-        for(const f of pendingGameFiles){
-          const safe = f.name.replace(/[^a-zA-Z0-9._-]/g, '_');
-          const fileId = `${Date.now()}-${Math.random().toString(36).slice(2,8)}-${safe}`;
-          const chunks = [], count = Math.ceil(f.size / GAME_CHUNK_BYTES);
-          for(let i = 0; i < count; i++){
-            const start = i * GAME_CHUNK_BYTES, end = Math.min(start + GAME_CHUNK_BYTES, f.size);
-            const part = f.slice(start, end, f.type || 'application/octet-stream');
-            const partName = `${fileId}.part-${String(i + 1).padStart(4, '0')}-of-${String(count).padStart(4, '0')}`;
-            const path = `${currentUser.id}/${partName}`;
-            st.textContent = `${t('upload_uploading')} ${f.name} — ${i + 1}/${count}`;
-            const url = await putFile('games', path, part, p => {
-              barI.style.width = Math.floor((done + part.size * p / 100) / total * 100) + '%';
-            });
-            chunks.push({ index: i + 1, total: count, name: `${f.name} — parça ${i + 1}/${count}`, size: part.size, url, path });
-            done += part.size;
-          }
-          uploaded.push({ name: f.name, size: f.size, chunked: true, chunkSize: GAME_CHUNK_BYTES, chunks });
-        }
-        const { error } = await supabase.from('games').insert({
+        up = await encryptGameChunks(f, `${currentUser.id}/${crypto.randomUUID()}`, (i, count, p) => {
+          st.textContent = `${t('upload_uploading')} ${f.name} — ${i + 1}/${count}`;
+          barI.style.width = Math.floor((i + p / 100) / count * 100) + '%';
+        });
+        const { data: g, error } = await supabase.from('games').insert({
           title: document.getElementById('g-title').value.trim(),
           description: document.getElementById('g-desc').value.trim(),
           cover_url: document.getElementById('g-cover').value.trim() || null,
-          files: uploaded, author_id: currentUser.id
-        });
+          files: [{ name: f.name, size: f.size, secure: true }], author_id: currentUser.id
+        }).select('id').single();
         if(error) throw error;
+        gameId = g.id;
+        const { error: e2 } = await supabase.from('game_secrets').insert({
+          game_id: String(gameId), key: up.key,
+          manifest: { exe: document.getElementById('g-exe').value.trim(), version: new Date().toISOString(), zipName: f.name, totalPlain: f.size, zipSha256: '', chunks: up.chunks }
+        });
+        if(e2) throw e2;
         st.textContent = t('game_published');
         renderGames();
       }catch(err){
-        const failedPaths = uploaded.flatMap(u => u.chunked && Array.isArray(u.chunks) ? u.chunks.map(c => c.path) : [u.path]).filter(Boolean);
-        if(failedPaths.length) for(let i = 0; i < failedPaths.length; i += 100) await supabase.storage.from('games').remove(failedPaths.slice(i, i + 100));
+        if(gameId !== null) await supabase.from('games').delete().eq('id', gameId);
+        if(up && up.paths.length) for(let i = 0; i < up.paths.length; i += 100) await supabase.storage.from('games').remove(up.paths.slice(i, i + 100));
         st.className = 'upload-status err'; st.textContent = t('err_upload') + (err.message || '');
         btn.disabled = false;
       }
@@ -817,32 +809,25 @@ async function loadGames(){
   const el = document.getElementById('gamesList'); if(!el) return;
   if(error){ el.innerHTML = `<div class="empty-state">${escapeHtml(error.message)}</div>`; return; }
   if(!data.length){ el.innerHTML = `<div class="empty-state">${t('games_empty')}</div>`; return; }
-  el.innerHTML = data.map(g => `<div class="post-card" data-game-id="${g.id}">
+  el.innerHTML = `<div class="post-card"><div class="post-title">STRUD Downloader</div>
+    <div class="post-content">Oyunları indirmek için programı indir, aç ve bu hesapla giriş yap. Dosyalar sadece programdan indirilir.</div>
+    <a class="btn small" href="${DOWNLOADER_URL}" download>⬇ STRUD Downloader'ı İndir (Windows)</a></div>` + data.map(g => `<div class="post-card" data-game-id="${g.id}">
     ${g.cover_url ? `<img class="game-cover" src="${safeUrl(g.cover_url)}" loading="lazy" alt="" onerror="this.style.display='none'">` : ''}
     <div class="post-meta"><span>${timeAgo(g.created_at)}</span></div>
     <div class="post-title">${escapeHtml(g.title)}</div>
     <div class="post-content">${escapeHtml(g.description || '')}</div>
-    ${(g.files || []).map((f, fi) => f.chunked && Array.isArray(f.chunks)
-      ? `<div class="file-chip"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(f.name)} · ${fmtSize(f.size)}</span><button class="btn small" data-download-game="${g.id}" data-file-index="${fi}">⬇ ZIP’i indir</button></div>`
-      : `<div class="file-chip"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(f.name)} · ${fmtSize(f.size)}</span><button class="btn small" data-download-old-game="${g.id}" data-file-index="${fi}">⬇ İndir</button></div>`).join('')}
+    ${(g.files || []).map(f => `<div class="file-chip"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(f.name)} · ${fmtSize(f.size)}${f.secure ? '' : ' · ESKİ YAYIN'}</span></div>`).join('')}
     ${isFounder() ? `<div class="post-actions"><button class="react-btn" data-del-game="${g.id}" style="margin-left:auto;color:#e26f6f">${t('delete_btn')}</button></div>` : ''}
   </div>`).join('');
-  el.querySelectorAll('[data-download-game]').forEach(b => b.onclick = async () => {
-    const g = data.find(x => String(x.id) === b.dataset.downloadGame), f = g?.files?.[+b.dataset.fileIndex];
-    if(f?.chunks) await downloadMergedBinary(await signedGameUrls(f.chunks.sort((a,b) => a.index - b.index)), f.name, 'application/zip', b);
-  });
-  el.querySelectorAll('[data-download-old-game]').forEach(b => b.onclick = async () => {
-    const g = data.find(x => String(x.id) === b.dataset.downloadOldGame), f = g?.files?.[+b.dataset.fileIndex];
-    if(f?.url) await downloadMergedBinary(await signedGameUrls([f]), f.name, 'application/octet-stream', b);
-  });
   el.querySelectorAll('[data-del-game]').forEach(b => b.onclick = async () => {
     if(!confirm(t('confirm_delete_game'))) return;
     const g = data.find(x => String(x.id) === b.dataset.delGame);
+    const { data: sec } = await supabase.from('game_secrets').select('manifest').eq('game_id', String(g.id)).maybeSingle();
     const { error } = await supabase.from('games').delete().eq('id', g.id);
     if(error){ alert(t('err_action_failed') + error.message); return; }
-    const paths = (g.files || []).flatMap(f => f.chunked && Array.isArray(f.chunks)
-      ? f.chunks.map(c => c.path).filter(Boolean)
-      : [f.path].filter(Boolean));
+    await supabase.from('game_secrets').delete().eq('game_id', String(g.id));
+    const paths = [...((sec && sec.manifest && sec.manifest.chunks) || []).map(c => c.path),
+      ...(g.files || []).flatMap(f => f.chunked && Array.isArray(f.chunks) ? f.chunks.map(c => c.path) : [f.path])].filter(Boolean);
     if(paths.length) for(let i = 0; i < paths.length; i += 100) await supabase.storage.from('games').remove(paths.slice(i, i + 100));
     loadGames();
   });
