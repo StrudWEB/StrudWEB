@@ -767,17 +767,19 @@ async function renderGames(){
 
     document.getElementById('gameForm').onsubmit = async e => {
       e.preventDefault();
-      if(!isFounder()) return;
+      if(!isFounder()){ alert('Oyun yayınlamak için kurucu hesabıyla giriş yapmalısın.'); return; }
       const f = pendingGameFiles[0];
       if(!f){ alert(t('err_need_files')); return; }
       const btn = e.target.querySelector('button[type="submit"]'), bar = document.getElementById('gProgress'), barI = bar.firstElementChild, st = document.getElementById('gStatus');
       btn.disabled = true; bar.classList.remove('hidden'); st.className = 'upload-status';
-      let up = null, gameId = null;
+      let up = null, gameId = null, stage = '1/3 şifreleme ve yükleme';
       try{
         up = await encryptGameChunks(f, `${currentUser.id}/${crypto.randomUUID()}`, (i, count, p) => {
           st.textContent = `${t('upload_uploading')} ${f.name} — ${i + 1}/${count}`;
           barI.style.width = Math.floor((i + p / 100) / count * 100) + '%';
         });
+        stage = '2/3 oyun kaydı (games tablosu)';
+        st.textContent = 'Oyun kaydı oluşturuluyor...';
         const { data: g, error } = await supabase.from('games').insert({
           title: document.getElementById('g-title').value.trim(),
           description: document.getElementById('g-desc').value.trim(),
@@ -786,17 +788,24 @@ async function renderGames(){
         }).select('id').single();
         if(error) throw error;
         gameId = g.id;
+        stage = '3/3 anahtar kaydı (game_secrets tablosu)';
+        st.textContent = 'Şifre anahtarı kaydediliyor...';
         const { error: e2 } = await supabase.from('game_secrets').insert({
           game_id: String(gameId), key: up.key,
           manifest: { exe: document.getElementById('g-exe').value.trim(), version: new Date().toISOString(), zipName: f.name, totalPlain: f.size, zipSha256: '', chunks: up.chunks }
         });
         if(e2) throw e2;
+        const { data: chk } = await supabase.from('game_secrets').select('game_id').eq('game_id', String(gameId)).maybeSingle();
+        if(!chk) throw new Error('Anahtar kaydı yazıldı ama geri okunamadı (izin sorunu olabilir).');
         st.textContent = t('game_published');
         renderGames();
       }catch(err){
         if(gameId !== null) await supabase.from('games').delete().eq('id', gameId);
         if(up && up.paths.length) for(let i = 0; i < up.paths.length; i += 100) await supabase.storage.from('games').remove(up.paths.slice(i, i + 100));
-        st.className = 'upload-status err'; st.textContent = t('err_upload') + (err.message || '');
+        const detail = (err && (err.message || err.error_description || err.details)) || JSON.stringify(err);
+        console.error('Oyun yayınlama hatası [' + stage + ']', err);
+        st.className = 'upload-status err'; st.textContent = 'Hata [' + stage + ']: ' + detail;
+        alert('Oyun yayınlanamadı.\nAşama: ' + stage + '\nHata: ' + detail);
         btn.disabled = false;
       }
     };
