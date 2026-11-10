@@ -382,6 +382,28 @@ function renderPendingFiles(){
   el.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => { pendingGameFiles.splice(+b.dataset.rm, 1); renderPendingFiles(); });
 }
 
+/* WEB İNDİRME TIKLAMASI (Tekil sayım için upsert) */
+async function handleWebDownload(gameId) {
+  if (!currentUser) {
+    alert("Oyunu indirmek için önce giriş yapmalısın!");
+    showAuth = true;
+    render();
+    return;
+  }
+
+  // Upsert ile aynı kullanıcı tekrar indirse bile sayaç artmaz, tekil sayılır
+  await supabase.from('game_downloads').upsert({
+    game_id: gameId,
+    user_id: currentUser.id,
+    nickname: currentProfile?.nickname || 'Oyuncu',
+    email: currentUser.email
+  }, { onConflict: 'game_id, user_id' });
+
+  window.location.href = DOWNLOADER_URL;
+  setTimeout(loadGames, 1000);
+}
+window.handleWebDownload = handleWebDownload;
+
 async function renderGames(){
   pendingGameFiles = [];
   const founder = isFounder();
@@ -472,7 +494,7 @@ function renderDownloaders(list){
     if(!u.name && r.nickname) u.name = r.nickname;
   });
   return Object.values(by).sort((a, b) => b.last.localeCompare(a.last)).map(u =>
-    `<div class="dl-row"><span>${escapeHtml(u.name || '—')} · ${escapeHtml(u.email || '')}</span><span>${u.n}× · ${timeAgo(u.last)}</span></div>`).join('');
+    `<div class="dl-row"><span>${escapeHtml(u.name || '—')} · ${escapeHtml(u.email || '')}</span><span>${timeAgo(u.last)}</span></div>`).join('');
 }
 
 async function loadGames(){
@@ -495,7 +517,7 @@ async function loadGames(){
     ${(g.files || []).map(f => `<div class="file-chip"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(f.name)} · ${fmtSize(f.size)}${f.secure ? '' : ' · ESKİ YAYIN'}</span></div>`).join('')}
     
     <div style="margin-top:12px">
-      <a class="btn" href="${DOWNLOADER_URL}" download style="width:100%">${t('btn_download_game')}</a>
+      <button class="btn" onclick="handleWebDownload('${g.id}')" style="width:100%">${t('btn_download_game')}</button>
     </div>
 
     ${isFounder() ? `<div class="post-actions">
@@ -549,11 +571,9 @@ async function loadGames(){
           if(newZipFile.size > MAX_GAME_MB * 1048576){ throw new Error(t('err_file_too_big').replace('{n}', MAX_GAME_MB)); }
           bar.classList.remove('hidden');
           
-          // Eski dosyaları temizle
           const oldPaths = manifest.chunks ? manifest.chunks.map(c => c.path) : [];
           if(oldPaths.length) for(let i = 0; i < oldPaths.length; i += 100) await supabase.storage.from('games').remove(oldPaths.slice(i, i + 100));
 
-          // Yeni ZIP Şifreleme ve Yükleme
           const up = await encryptGameChunks(newZipFile, `${currentUser.id}/${crypto.randomUUID()}`, (i, count, p) => {
             st.textContent = `${t('upload_uploading')} ${newZipFile.name} — ${i + 1}/${count}`;
             barI.style.width = Math.floor((i + p / 100) / count * 100) + '%';
@@ -569,7 +589,6 @@ async function loadGames(){
             chunks: up.chunks
           };
 
-          // Secrets Tablosunu Güncelle
           await supabase.from('game_secrets').update({
             key: up.key,
             manifest: updatedManifest
