@@ -28,7 +28,7 @@ a{color:inherit;text-decoration:none}
 .pill.admin{color:#000;background:var(--sick);border-color:var(--sick);font-weight:700}
 .pill.clickable{cursor:pointer}
 .pill.clickable:hover{border-color:var(--dim);color:var(--text)}
-.btn{font-family:inherit;font-size:12px;font-weight:600;padding:7px 14px;background:var(--blood-dim);color:var(--text);border:1px solid var(--blood);border-radius:3px;cursor:pointer}
+.btn{font-family:inherit;font-size:12px;font-weight:600;padding:7px 14px;background:var(--blood-dim);color:var(--text);border:1px solid var(--blood);border-radius:3px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px}
 .btn:hover{background:var(--blood);box-shadow:0 0 10px var(--glow)}
 .btn.ghost{background:transparent;border-color:var(--border);color:var(--dim)}
 .btn.ghost:hover{color:var(--text);border-color:var(--dim)}
@@ -103,7 +103,7 @@ document.getElementById('brandLogo').src = LOGO;
 let currentLang = localStorage.getItem('strud_lang') || ((navigator.language || '').toLowerCase().startsWith('tr') ? 'tr' : 'en');
 const I18N = {
 tr:{
- edit_btn:"Düzenle",save_btn:"Kaydet",cancel_btn:"İptal",downloaders_btn:"İndirenler",no_downloads:"Henüz indiren yok.",game_updated:"Güncellendi ✓",label_exe:"ÇALIŞTIRILACAK EXE",
+ edit_btn:"Düzenle / Güncelle",save_btn:"Kaydet",cancel_btn:"İptal",downloaders_btn:"İndirenler",no_downloads:"Henüz indiren yok.",game_updated:"Güncellendi ✓",label_exe:"ÇALIŞTIRILACAK EXE",
  auth_sub:"Giriş Yapın",label_nickname:"RUMUZ (NICKNAME)",label_email:"GMAIL ADRESİ",email_note:"* 1 Gmail adresi başına 1 hesap oluşturulabilir.",label_password:"ŞİFRE",
  btn_create_account:"Hesap Oluştur",btn_login:"Giriş Yap",btn_resend_confirmation:"Onay E-postasını Tekrar Gönder",toggle_have_account:"Zaten bir hesabın var mı?",toggle_login_link:"Giriş yap",toggle_no_account:"Hesabın yok mu?",toggle_signup_link:"Kayıt ol",
  err_gmail_only:"Sadece @gmail.com uzantılı e-posta adresleri kabul edilir.",err_gmail_plus_limit:"Bu e-posta ile en fazla 2 hesap açılabilir: isim@gmail.com veya isim+2@gmail.com",err_nickname_short:"Rumuz en az 3 karakter olmalı.",
@@ -114,10 +114,11 @@ tr:{
  db_scanning:"Yükleniyor...",delete_btn:"Sil",err_action_failed:"İşlem başarısız: ",
  games_heading:"Oyun Yayınları",games_empty:"Henüz yayınlanmış oyun yok.",games_publish_heading:"Yeni Oyun Yayınla (Sadece Yetkililer)",
  drop_hint:"Oyun dosyasını buraya sürükleyip bırakın veya tıklayıp seçin (zip)",btn_publish_game:"Oyunu Yayınla",err_need_files:"En az bir oyun dosyası ekleyin.",game_published:"Oyun yayınlandı ✓",confirm_delete_game:"Bu oyunu ve dosyalarını silmek istediğinize emin misiniz?",
- setup_complete_btn:"Kurulumu Tamamla",err_nickname_taken:"Bu rumuz zaten kayıtlı.",footer_text:"© 2026 STRUD WEB — Tüm Hakları Saklıdır. | SS"
+ setup_complete_btn:"Kurulumu Tamamla",err_nickname_taken:"Bu rumuz zaten kayıtlı.",footer_text:"© 2026 STRUD WEB — Tüm Hakları Saklıdır. | SS",
+ btn_download_game:"⬇ Oyunu İndir (STRUD Downloader)", label_update_zip:"YENİ OYUN ZIP DOSYASI (İSTEĞE BAĞLI GÜNCELLEME)"
 },
 en:{
- edit_btn:"Edit",save_btn:"Save",cancel_btn:"Cancel",downloaders_btn:"Downloads",no_downloads:"No downloads yet.",game_updated:"Updated ✓",label_exe:"EXE TO RUN",
+ edit_btn:"Edit / Update",save_btn:"Save",cancel_btn:"Cancel",downloaders_btn:"Downloads",no_downloads:"No downloads yet.",game_updated:"Updated ✓",label_exe:"EXE TO RUN",
  auth_sub:"Sign In",label_nickname:"NICKNAME",label_email:"GMAIL ADDRESS",email_note:"* Only 1 account per Gmail address.",label_password:"PASSWORD",
  btn_create_account:"Create Account",btn_login:"Log In",btn_resend_confirmation:"Resend Confirmation Email",toggle_have_account:"Already have an account?",toggle_login_link:"Log in",toggle_no_account:"Don't have an account?",toggle_signup_link:"Sign up",
  err_gmail_only:"Only @gmail.com email addresses are accepted.",err_gmail_plus_limit:"At most 2 accounts per email: name@gmail.com or name+2@gmail.com",err_nickname_short:"Nickname must be at least 3 characters.",
@@ -128,7 +129,8 @@ en:{
  db_scanning:"Loading...",delete_btn:"Delete",err_action_failed:"Action failed: ",
  games_heading:"Game Releases",games_empty:"No games published yet.",games_publish_heading:"Publish New Game (Authorized Only)",
  drop_hint:"Drag & drop the game file here or click to choose (zip)",btn_publish_game:"Publish Game",err_need_files:"Add at least one game file.",game_published:"Game published ✓",confirm_delete_game:"Delete this game and its files?",
- setup_complete_btn:"Complete Setup",err_nickname_taken:"This nickname is already registered.",footer_text:"© 2026 STRUD WEB — All Rights Reserved. | SS"
+ setup_complete_btn:"Complete Setup",err_nickname_taken:"This nickname is already registered.",footer_text:"© 2026 STRUD WEB — All Rights Reserved. | SS",
+ btn_download_game:"⬇ Download Game (STRUD Downloader)", label_update_zip:"NEW GAME ZIP FILE (OPTIONAL UPDATE)"
 }};
 const t = k => (I18N[currentLang] && I18N[currentLang][k]) || k;
 function setLang(l){ currentLang = l; localStorage.setItem('strud_lang', l); document.documentElement.lang = l; render(); }
@@ -155,7 +157,6 @@ function timeAgo(s){
   return d.toLocaleDateString(en ? 'en-US' : 'tr-TR');
 }
 
-/* Kurucu: SADECE doğrulanmış oturum e-postası. Veritabanı tarafında da aynı kontrol RLS ile yapılır. */
 const FOUNDER_EMAIL = 'keremberber3761@gmail.com';
 const isFounder = () => !!(currentUser && currentUser.email && currentUser.email.trim().toLowerCase() === FOUNDER_EMAIL);
 
@@ -168,7 +169,6 @@ const DOWNLOADER_URL = SUPABASE_URL + '/storage/v1/object/public/downloader/STRU
 const toHex = buf => [...new Uint8Array(buf)].map(x => x.toString(16).padStart(2, '0')).join('');
 const toB64 = u8 => { let s = ''; for(let i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000)); return btoa(s); };
 
-// Oyun ZIP'ini tarayıcıda parçalara böler, AES-256-GCM ile şifreler, private 'games' bucket'ına yükler.
 async function encryptGameChunks(file, folder, onProgress){
   const raw = crypto.getRandomValues(new Uint8Array(32));
   const key = await crypto.subtle.importKey('raw', raw, 'AES-GCM', false, ['encrypt']);
@@ -446,8 +446,6 @@ async function renderGames(){
           manifest: { exe: document.getElementById('g-exe').value.trim(), version: new Date().toISOString(), zipName: f.name, totalPlain: f.size, zipSha256: '', chunks: up.chunks }
         });
         if(e2) throw e2;
-        const { data: chk } = await supabase.from('game_secrets').select('game_id').eq('game_id', String(gameId)).maybeSingle();
-        if(!chk) throw new Error('Anahtar kaydı yazıldı ama geri okunamadı (izin sorunu olabilir).');
         st.textContent = t('game_published');
         renderGames();
       }catch(err){
@@ -468,7 +466,7 @@ function renderDownloaders(list){
   if(!list.length) return `<div class="upload-status">${t('no_downloads')}</div>`;
   const by = {};
   list.forEach(r => {
-    const u = by[r.user_id] ||= { name: r.nickname, email: r.email, n: 0, last: r.created_at };
+    const u = by[r.user_id || r.id] ||= { name: r.nickname, email: r.email, n: 0, last: r.created_at };
     u.n++;
     if(r.created_at > u.last) u.last = r.created_at;
     if(!u.name && r.nickname) u.name = r.nickname;
@@ -484,19 +482,22 @@ async function loadGames(){
   if(!data.length){ el.innerHTML = `<div class="empty-state">${t('games_empty')}</div>`; return; }
 
   const dl = {};
-  if(isFounder()){
-    const { data: d } = await supabase.from('game_downloads').select('game_id, user_id, nickname, email, created_at').order('created_at', { ascending: false }).limit(5000);
-    (d || []).forEach(r => (dl[r.game_id] ||= []).push(r));
-  }
+  const { data: d } = await supabase.from('game_downloads').select('game_id, user_id, nickname, email, created_at').order('created_at', { ascending: false }).limit(5000);
+  (d || []).forEach(r => (dl[String(r.game_id)] ||= []).push(r));
 
   el.innerHTML = `<div class="post-card"><div class="post-title">STRUD Downloader</div>
-    <div class="post-content">Oyunları indirmek için programı indir, aç ve bu hesapla giriş yap. Dosyalar sadece programdan indirilir.</div>
+    <div class="post-content">Oyunları indirmek için programı indir, aç ve bu hesapla giriş yap. Dosyalar korumalı olarak sadece programdan indirilir.</div>
     <a class="btn small" href="${DOWNLOADER_URL}" download>⬇ STRUD Downloader'ı İndir (Windows)</a></div>` + data.map(g => `<div class="post-card" data-game-id="${g.id}">
     ${g.cover_url ? `<img class="game-cover" src="${safeUrl(g.cover_url)}" loading="lazy" alt="" onerror="this.style.display='none'">` : ''}
     <div class="post-meta"><span>${timeAgo(g.created_at)}</span></div>
     <div class="post-title">${escapeHtml(g.title)}</div>
     <div class="post-content">${escapeHtml(g.description || '')}</div>
     ${(g.files || []).map(f => `<div class="file-chip"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(f.name)} · ${fmtSize(f.size)}${f.secure ? '' : ' · ESKİ YAYIN'}</span></div>`).join('')}
+    
+    <div style="margin-top:12px">
+      <a class="btn" href="${DOWNLOADER_URL}" download style="width:100%">${t('btn_download_game')}</a>
+    </div>
+
     ${isFounder() ? `<div class="post-actions">
         <button class="react-btn" data-dl-game="${g.id}">⬇ ${t('downloaders_btn')} (${(dl[String(g.id)] || []).length})</button>
         <button class="react-btn" data-edit-game="${g.id}">${t('edit_btn')}</button>
@@ -509,6 +510,7 @@ async function loadGames(){
   el.querySelectorAll('[data-dl-game]').forEach(b => b.onclick = () =>
     document.getElementById('dl-' + b.dataset.dlGame).classList.toggle('hidden'));
 
+  /* DÜZENLEME VE ZIP GÜNCELLEME SİSTEMİ */
   el.querySelectorAll('[data-edit-game]').forEach(b => b.onclick = async () => {
     const g = data.find(x => String(x.id) === b.dataset.editGame);
     const box = document.getElementById('edit-' + g.id);
@@ -520,32 +522,76 @@ async function loadGames(){
       <div class="field"><label>${t('label_game_desc')}</label><textarea name="desc" maxlength="4000">${escapeHtml(g.description || '')}</textarea></div>
       <div class="field"><label>${t('label_exe')}</label><input type="text" name="exe" maxlength="200" required value="${escapeHtml(manifest.exe || '')}"></div>
       <div class="field"><label>${t('label_game_cover')}</label><input type="url" name="cover" data-upload="image" placeholder="https://..." value="${escapeHtml(g.cover_url || '')}"></div>
+      <div class="field">
+        <label>${t('label_update_zip')}</label>
+        <input type="file" name="newzip" accept=".zip">
+      </div>
+      <div class="progress hidden" data-edit-progress><i></i></div>
       <button type="submit" class="btn small">${t('save_btn')}</button>
       <button type="button" class="btn ghost small" data-cancel>${t('cancel_btn')}</button>
       <div class="upload-status" data-st></div>
     </form>`;
-    const form = box.firstElementChild, st = form.querySelector('[data-st]');
+    const form = box.firstElementChild, st = form.querySelector('[data-st]'), bar = form.querySelector('[data-edit-progress]'), barI = bar.firstElementChild;
     enhanceUploadFields(form);
     form.querySelector('[data-cancel]').onclick = () => { box.innerHTML = ''; };
     form.onsubmit = async e => {
       e.preventDefault();
       if(!isFounder()) return;
       const f = form.elements;
-      st.className = 'upload-status'; st.textContent = '...';
-      const { data: upd, error } = await supabase.from('games').update({
-        title: f.title.value.trim(),
-        description: f.desc.value.trim(),
-        cover_url: f.cover.value.trim() || null
-      }).eq('id', g.id).select('id');
-      if(error || !upd || !upd.length){ st.className = 'upload-status err'; st.textContent = t('err_action_failed') + (error ? error.message : 'izin yok (RLS)'); return; }
-      const newExe = f.exe.value.trim();
-      if(sec && newExe !== manifest.exe){
-        const { data: u2, error: e2 } = await supabase.from('game_secrets')
-          .update({ manifest: { ...manifest, exe: newExe } }).eq('game_id', String(g.id)).select('game_id');
-        if(e2 || !u2 || !u2.length){ st.className = 'upload-status err'; st.textContent = t('err_action_failed') + (e2 ? e2.message : 'izin yok (RLS)'); return; }
+      st.className = 'upload-status'; st.textContent = 'Güncelleniyor...';
+      const newZipFile = f.newzip.files && f.newzip.files[0];
+      
+      let updatedFiles = g.files;
+      let updatedManifest = { ...manifest, exe: f.exe.value.trim() };
+
+      try {
+        if(newZipFile){
+          if(newZipFile.size > MAX_GAME_MB * 1048576){ throw new Error(t('err_file_too_big').replace('{n}', MAX_GAME_MB)); }
+          bar.classList.remove('hidden');
+          
+          // Eski dosyaları temizle
+          const oldPaths = manifest.chunks ? manifest.chunks.map(c => c.path) : [];
+          if(oldPaths.length) for(let i = 0; i < oldPaths.length; i += 100) await supabase.storage.from('games').remove(oldPaths.slice(i, i + 100));
+
+          // Yeni ZIP Şifreleme ve Yükleme
+          const up = await encryptGameChunks(newZipFile, `${currentUser.id}/${crypto.randomUUID()}`, (i, count, p) => {
+            st.textContent = `${t('upload_uploading')} ${newZipFile.name} — ${i + 1}/${count}`;
+            barI.style.width = Math.floor((i + p / 100) / count * 100) + '%';
+          });
+
+          updatedFiles = [{ name: newZipFile.name, size: newZipFile.size, secure: true }];
+          updatedManifest = {
+            exe: f.exe.value.trim(),
+            version: new Date().toISOString(),
+            zipName: newZipFile.name,
+            totalPlain: newZipFile.size,
+            zipSha256: '',
+            chunks: up.chunks
+          };
+
+          // Secrets Tablosunu Güncelle
+          await supabase.from('game_secrets').update({
+            key: up.key,
+            manifest: updatedManifest
+          }).eq('game_id', String(g.id));
+        } else if(sec && f.exe.value.trim() !== manifest.exe){
+          await supabase.from('game_secrets').update({ manifest: updatedManifest }).eq('game_id', String(g.id));
+        }
+
+        const { data: upd, error } = await supabase.from('games').update({
+          title: f.title.value.trim(),
+          description: f.desc.value.trim(),
+          cover_url: f.cover.value.trim() || null,
+          files: updatedFiles
+        }).eq('id', g.id).select('id');
+
+        if(error || !upd || !upd.length){ throw new Error(error ? error.message : 'İzin yok veya güncelleme başarısız.'); }
+
+        st.textContent = t('game_updated');
+        loadGames();
+      } catch(err) {
+        st.className = 'upload-status err'; st.textContent = t('err_action_failed') + (err.message || '');
       }
-      st.textContent = t('game_updated');
-      loadGames();
     };
   });
 
